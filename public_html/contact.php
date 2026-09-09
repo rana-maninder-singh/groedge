@@ -82,10 +82,10 @@ $addr = $cfg->address ?? (object)['company' => '', 'line1' => '', 'line2' => '',
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact GroEdge | Schedule Your Free Consultation</title>
+    <title>Contact GroEdge | Book a Free Operational Assessment</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="logo.png">
-    <meta name="description" content="Contact GroEdge for a free operational assessment. Schedule a consultation with our experts to transform your business processes.">
+    <meta name="description" content="Schedule a complimentary 60-minute operational assessment with GroEdge. Identify your top constraints in cost, quality, capacity, or delivery—with clear next steps.">
 </head>
 <body>
     <header>
@@ -94,8 +94,8 @@ $addr = $cfg->address ?? (object)['company' => '', 'line1' => '', 'line2' => '',
             <h1>GROEDGE</h1>
             <p class="tagline">OPERATIONAL EXCELLENCE CONSULTANTS</p>
         </div>
-        <h1>Start Your Transformation Journey</h1>
-        <p>Schedule a free consultation with our experts. Let's discuss how we can drive measurable improvements in your operations.</p>
+        <h1>Tell us where operations are stuck</h1>
+        <p>Share your constraint. We will respond within one business day with a proposed assessment agenda—focused on outcomes, not a sales pitch.</p>
     </header>
 
     <nav>
@@ -114,42 +114,42 @@ $addr = $cfg->address ?? (object)['company' => '', 'line1' => '', 'line2' => '',
 
         <div class="section-content">
             <?php if ($status === 'success'): ?>
-            <div class="form-status success" style="background: #d4edda; color: #155724; padding: 15px; border-radius: 6px; margin-bottom: 25px;">Thank you! Your request has been submitted. We'll contact you within 24 business hours.</div>
+            <div class="form-status success" style="background: #d4edda; color: #155724; padding: 15px; border-radius: 6px; margin-bottom: 25px;">Thank you. Your request is with our team. We will contact you within one business day to schedule your assessment.</div>
             <?php elseif ($status === 'error'): ?>
-            <div class="form-status error" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px;">Your message was saved. There was a problem sending the email; we'll still get in touch.</div>
+            <div class="form-status error" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px;">Your details were saved. Email delivery had a problem on our side—we will still follow up directly.</div>
             <?php elseif ($status === 'save_error'): ?>
-            <div class="form-status error" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px;">We could not save your request. Please try again or email us directly.</div>
+            <div class="form-status error" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px;">We could not save your request online. Please email info@groedge.in or call us, and we will take it from there.</div>
             <?php elseif (!empty($form_errors)): ?>
             <div class="form-status error" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px;">Please correct the highlighted fields and submit again.</div>
             <?php endif; ?>
 
             <div style="margin-bottom: 40px;">
-                <h2>Your Time is Valuable. We Make Every Second Count.</h2>
-                <p>Up to <strong>40% of a leader's time goes to managing backend operations and firefighting.</strong> Our consultation helps you reclaim this time by implementing efficient, scalable processes.</p>
+                <h2>Leaders lose days to firefighting. Get them back.</h2>
+                <p>When processes are unstable, senior time leaks into exceptions, expedites, and status meetings. A short, structured assessment surfaces the few changes that free capacity and calm the operation—before you commit to a larger programme.</p>
                 <div style="text-align: center; margin: 30px 0;">
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                         alt="Visualization of efficient workflow and data analysis"
+                         alt="Operations performance review and data-led decision making"
                          style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
                     <div style="text-align: center; padding: 25px; background: #f8fafc;">
-                        <h3 style="color: #2c5282;">Free Initial Assessment</h3>
-                        <p>60-minute consultation to identify your top 3 improvement opportunities</p>
+                        <h3 style="color: #2c5282;">60-minute assessment</h3>
+                        <p>Clarify your top constraints and a practical shortlist of next moves.</p>
                     </div>
                     <div style="text-align: center; padding: 25px; background: #f8fafc;">
-                        <h3 style="color: #2c5282;">No Obligation</h3>
-                        <p>Explore possibilities without commitment. We provide clear value upfront.</p>
+                        <h3 style="color: #2c5282;">No obligation</h3>
+                        <p>Useful whether or not you engage us further. You leave with clarity.</p>
                     </div>
                     <div style="text-align: center; padding: 25px; background: #f8fafc;">
-                        <h3 style="color: #2c5282;">Industry-Specific Insights</h3>
-                        <p>Get recommendations tailored to your specific sector and challenges.</p>
+                        <h3 style="color: #2c5282;">Sector-aware advice</h3>
+                        <p>Guidance grounded in manufacturing, pharma, chemicals, and logistics realities.</p>
                     </div>
                 </div>
             </div>
 
             <div class="contact-info" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 50px;">
                 <div class="form-section">
-                    <h3>Schedule Your Free Consultation</h3>
+                    <h3>Request your free assessment</h3>
                     <div style="margin-bottom: 30px;">
                         <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                              alt="A GroEdge consultant discussing a project plan with a business executive"
@@ -231,19 +231,19 @@ $addr = $cfg->address ?? (object)['company' => '', 'line1' => '', 'line2' => '',
                         </div>
                         <div class="form-group">
                             <label for="challenge">Biggest Operational Challenge *</label>
-                            <textarea id="challenge" name="challenge" rows="4" placeholder="Briefly describe your biggest operational challenge..." required><?php echo htmlspecialchars($form_values['challenge']); ?></textarea>
+                            <textarea id="challenge" name="challenge" rows="4" placeholder="e.g. OTIF below 90%, chronic overtime, inventory rising with sales, quality escapes, capacity cliff in Q3…" required><?php echo htmlspecialchars($form_values['challenge']); ?></textarea>
                             <div class="error-message" id="challenge-error"><?php echo htmlspecialchars($form_errors['challenge'] ?? ''); ?></div>
                         </div>
                         <div class="form-group">
                             <label for="message">Additional Details</label>
-                            <textarea id="message" name="message" rows="4" placeholder="Any other details you'd like to share..."><?php echo htmlspecialchars($form_values['message']); ?></textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="Sites involved, timeline pressure, systems in use, or anything else we should know…"><?php echo htmlspecialchars($form_values['message']); ?></textarea>
                         </div>
                         <div class="form-group" style="margin-top: 30px;">
                             <button type="submit" class="submit-btn">
-                                <span class="btn-text">Schedule Free Consultation</span>
-                                <span class="loading-spinner" style="display:none;">Scheduling...</span>
+                                <span class="btn-text">Request free assessment</span>
+                                <span class="loading-spinner" style="display:none;">Sending…</span>
                             </button>
-                            <p style="font-size: 0.9rem; color: #718096; margin-top: 15px;">By submitting this form, you agree to our Privacy Policy. We'll contact you within 24 business hours.</p>
+                            <p style="font-size: 0.9rem; color: #718096; margin-top: 15px;">We respect confidentiality. A principal consultant typically responds within one business day.</p>
                         </div>
                     </form>
                 </div>
@@ -266,44 +266,44 @@ $addr = $cfg->address ?? (object)['company' => '', 'line1' => '', 'line2' => '',
                         <p><?php echo htmlspecialchars($addr->country ?? ''); ?></p>
                     </div>
                     <div class="info-card">
-                        <h3>What Happens Next?</h3>
+                        <h3>What happens next</h3>
                         <ol style="padding-left: 20px; margin-top: 15px;">
-                            <li style="margin-bottom: 10px;"><strong>Confirmation Call:</strong> We'll call to confirm details and schedule your consultation.</li>
-                            <li style="margin-bottom: 10px;"><strong>Free Consultation:</strong> 60-minute session with a senior consultant.</li>
-                            <li style="margin-bottom: 10px;"><strong>Assessment Report:</strong> Receive a high-level analysis of your top improvement opportunities.</li>
-                            <li><strong>Optional Proposal:</strong> If interested, we'll provide a detailed project proposal.</li>
+                            <li style="margin-bottom: 10px;"><strong>Confirmation:</strong> We acknowledge your request and propose times for a 60-minute working session.</li>
+                            <li style="margin-bottom: 10px;"><strong>Assessment:</strong> A focused discussion on your constraint, data, and operating context.</li>
+                            <li style="margin-bottom: 10px;"><strong>Written summary:</strong> You receive a short priority list and recommended next steps.</li>
+                            <li><strong>Optional proposal:</strong> If there is a fit, we outline scope, timeline, and commercial terms—plainly.</li>
                         </ol>
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: 50px; padding: 40px; background: #f8fafc; border-radius: 8px;">
-                <h2 style="text-align: center;">Serving Businesses Across India & Globally</h2>
-                <p style="text-align: center; max-width: 800px; margin: 20px auto 30px;">We've successfully delivered projects across 30+ states in India and have supported clients in the Middle East and Southeast Asia.</p>
+                <h2 style="text-align: center;">Where we work</h2>
+                <p style="text-align: center; max-width: 800px; margin: 20px auto 30px;">Based in the NCR region with on-site delivery across India’s manufacturing and distribution hubs. We also support multi-site programmes that need one operating standard.</p>
                 <div style="text-align: center; margin: 40px 0;">
                     <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                         alt="Global map highlighting GroEdge's service regions"
+                         alt="Industrial landscape representing GroEdge client regions"
                          style="max-width: 90%; height: auto; border-radius: 8px; border: 1px solid #e2e8f0;">
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center; margin-top: 30px;">
-                    <div><h3 style="color: #2c5282;">30+</h3><p>States in India</p></div>
-                    <div><h3 style="color: #2c5282;">5+</h3><p>Countries</p></div>
-                    <div><h3 style="color: #2c5282;">200+</h3><p>Successful Clients</p></div>
-                    <div><h3 style="color: #2c5282;">1M+</h3><p>Consulting Hours</p></div>
+                    <div><h3 style="color: #2c5282;">Pan-India</h3><p>On-site plant support</p></div>
+                    <div><h3 style="color: #2c5282;">NCR hub</h3><p>Client access &amp; coordination</p></div>
+                    <div><h3 style="color: #2c5282;">Multi-site</h3><p>Standards that travel</p></div>
+                    <div><h3 style="color: #2c5282;">Hands-on</h3><p>Floor-led implementation</p></div>
                 </div>
             </div>
 
             <div class="cta-section" style="margin-top: 50px;">
                 <div style="margin-bottom: 25px;">
                     <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                         alt="Team celebrating a successful project milestone"
+                         alt="Professional workspace for a client working session"
                          style="width: 100%; border-radius: 8px;">
                 </div>
-                <h2 style="color: white; text-align: center;">Don't Let Inefficiency Cost You Another Day</h2>
-                <p style="color: rgba(255,255,255,0.9); text-align: center; max-width: 700px; margin: 20px auto 30px;">Every day of operational inefficiency costs your business revenue, growth opportunities, and competitive advantage. Start your transformation today.</p>
+                <h2 style="color: white; text-align: center;">Every week of instability has a cost</h2>
+                <p style="color: rgba(255,255,255,0.9); text-align: center; max-width: 700px; margin: 20px auto 30px;">Expedites, overtime, scrap, and missed OTIF rarely fix themselves. Start with a clear read of the constraint—then decide how far to go.</p>
                 <div style="text-align: center;">
-                    <a href="tel:<?php echo htmlspecialchars($cfg->contact_phone_raw ?? preg_replace('/\D/', '', $cfg->contact_phone ?? '')); ?>" class="cta-button" style="background: white; color: #1a365d; margin-right: 15px;">📞 Call Now: <?php echo htmlspecialchars($cfg->contact_phone ?? ''); ?></a>
-                    <a href="mailto:<?php echo htmlspecialchars($cfg->email_info ?? ''); ?>" class="cta-button" style="background: transparent; border: 2px solid white;">✉️ Email Us</a>
+                    <a href="tel:<?php echo htmlspecialchars($cfg->contact_phone_raw ?? preg_replace('/\D/', '', $cfg->contact_phone ?? '')); ?>" class="cta-button" style="background: white; color: #1a365d; margin-right: 15px;">Call <?php echo htmlspecialchars($cfg->contact_phone ?? ''); ?></a>
+                    <a href="mailto:<?php echo htmlspecialchars($cfg->email_info ?? ''); ?>" class="cta-button" style="background: transparent; border: 2px solid white;">Email us</a>
                 </div>
             </div>
         </div>
@@ -311,8 +311,8 @@ $addr = $cfg->address ?? (object)['company' => '', 'line1' => '', 'line2' => '',
 
     <footer>
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <p style="margin-bottom: 10px;">&copy; 2025 GroEdge Management Consulting. All Rights Reserved.</p>
-            <p style="font-size: 0.9rem; opacity: 0.8;">Ready to Transform • Schedule Today • Drive Excellence</p>
+            <p style="margin-bottom: 10px;">&copy; 2026 GroEdge Management Consulting. All Rights Reserved.</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">Clarity first. Then execution.</p>
         </div>
     </footer>
 

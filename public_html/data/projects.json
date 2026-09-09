@@ -2,76 +2,76 @@
     "key_achievements": [
         {
             "label": "15+",
-            "description": "Years Combined Experience"
+            "description": "Years in operations & Lean"
         },
         {
-            "label": "47%",
-            "description": "Average Process Efficiency Gain"
+            "label": "20–45%",
+            "description": "Typical cycle-time gains"
         },
         {
-            "label": "28%",
-            "description": "Typical Operational Cost Reduction"
+            "label": "15–30%",
+            "description": "Cost opportunity ranges"
         },
         {
-            "label": "98%",
-            "description": "Client Project Satisfaction"
+            "label": "On-site",
+            "description": "Implementation, not decks alone"
         }
     ],
     "projects": [
         {
             "id": "proj-1",
-            "title": "End-to-End Supply Chain Optimization",
-            "client": "Leading Automotive Components Manufacturer",
+            "title": "Procurement-to-delivery flow reset",
+            "client": "Tier-1 automotive components manufacturer",
             "industry": "Manufacturing",
             "year": "2024",
-            "description": "GroEdge partnered with a Tier-1 automotive supplier to redesign their procurement-to-delivery flow, reducing lead times and inventory while improving on-time delivery.",
+            "description": "A multi-plant supplier faced growing lead times and rising inventory despite strong demand. GroEdge redesigned the end-to-end material and information flow—from planning signals to dispatch—so plants could promise dates they could keep.",
             "achievements": [
-                "35% reduction in average lead time",
-                "22% decrease in finished goods inventory",
-                "On-time delivery improved from 78% to 96%",
-                "Standardized processes across 4 regional plants"
+                "Average lead time cut by 35%",
+                "Finished-goods inventory down 22%",
+                "On-time delivery lifted from 78% to 96%",
+                "Common standards rolled out across 4 regional plants"
             ]
         },
         {
             "id": "proj-2",
-            "title": "Lean Operations Transformation",
-            "client": "Mid-size Healthcare Equipment Company",
-            "industry": "Healthcare",
+            "title": "Lean transformation on critical product lines",
+            "client": "Mid-size healthcare equipment manufacturer",
+            "industry": "Healthcare / Medical devices",
             "year": "2024",
-            "description": "A full lean transformation engagement focusing on value stream mapping, waste elimination, and standard work across production and support functions.",
+            "description": "Capacity was capped by long changeovers and unstable quality. We ran value-stream mapping, SMED, and standard work with production teams—then locked gains with a daily management rhythm.",
             "achievements": [
-                "40% improvement in throughput in key product lines",
-                "Setup time reduced by 60% on critical equipment",
-                "First-pass quality improved from 91% to 98.5%",
-                "Staff trained and certified in lean fundamentals"
+                "Throughput up ~40% on priority lines",
+                "Critical equipment setup time cut by 60%",
+                "First-pass yield improved from 91% to 98.5%",
+                "Supervisors and operators certified in Lean fundamentals"
             ]
         },
         {
             "id": "proj-3",
-            "title": "Warehouse & Distribution Centre Redesign",
-            "client": "National Consumer Goods Distributor",
+            "title": "Distribution centre redesign for growth",
+            "client": "National consumer goods distributor",
             "industry": "Logistics",
             "year": "2023",
-            "description": "Redesigned layout, slotting, and picking processes for a 80,000 sq ft distribution centre to support 30% volume growth without proportional cost increase.",
+            "description": "An 80,000 sq ft DC needed to absorb ~30% volume growth without a matching jump in labour cost. We redesigned layout, slotting, and pick paths, then restaffed roles around the new flow.",
             "achievements": [
                 "Pick-path distance reduced by 45%",
-                "Daily throughput capacity increased by 38%",
-                "Labour cost per order reduced by 25%",
-                "Safety incidents reduced to zero over 12 months"
+                "Daily throughput capacity +38%",
+                "Labour cost per order down 25%",
+                "Zero recordable safety incidents over the following 12 months"
             ]
         },
         {
             "id": "proj-4",
-            "title": "Operational Due Diligence & Integration",
-            "client": "Private Equity Portfolio Company",
-            "industry": "Professional Services",
+            "title": "Operational diligence & site consolidation",
+            "client": "Private equity–backed industrial business",
+            "industry": "Industrial / Professional services",
             "year": "2023",
-            "description": "Operational due diligence for an acquisition followed by post-merger integration support to consolidate two manufacturing sites and align processes.",
+            "description": "Pre-deal operational diligence identified integration risks and synergy levers. Post-close, GroEdge supported consolidation of two manufacturing sites and alignment of processes without disrupting key accounts.",
             "achievements": [
-                "Identified €2.1M annual synergy opportunities",
-                "Successful consolidation of two sites within 8 months",
-                "Unified ERP and reporting within first year",
-                "Zero disruption to key customer deliveries"
+                "Identified ₹17+ crore annual synergy opportunity",
+                "Two sites consolidated within 8 months",
+                "Unified ERP and management reporting in year one",
+                "Zero missed commitments to priority customers during cutover"
             ]
         }
     ]

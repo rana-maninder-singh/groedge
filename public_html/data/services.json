@@ -1,99 +1,99 @@
 {
-    "page_title": "Strategic Consulting Services",
-    "page_intro": "Our comprehensive suite of consulting services is designed to address the complete spectrum of operational challenges, delivering sustainable improvements across your organization.",
-    "intro_paragraph": "Each of our consulting services is delivered through a structured methodology that combines analytical rigor with practical implementation support. We focus on creating solutions that are tailored to your specific business context while incorporating industry best practices.",
+    "page_title": "Services that move the P&L",
+    "page_intro": "Focused workstreams for manufacturers and supply-chain organisations—diagnosed on site, designed with your people, and delivered until results show in cost, quality, and delivery.",
+    "intro_paragraph": "We do not sell a catalogue of workshops. We select the few interventions that unlock your constraint—then execute with your supervisors until the new standard is routine. Below is how clients typically engage us.",
     "pillars": [
-        {"title": "Analysis", "description": "Deep diagnostic assessment"},
-        {"title": "Design", "description": "Tailored solution development"},
-        {"title": "Implement", "description": "Phased execution support"},
-        {"title": "Sustain", "description": "Long-term capability building"}
+        {"title": "Diagnose", "description": "Find the real constraint"},
+        {"title": "Design", "description": "Build a workable solution"},
+        {"title": "Deliver", "description": "Implement on the floor"},
+        {"title": "Embed", "description": "Leave capability behind"}
     ],
     "approach_steps": [
-        {"number": 1, "title": "Discovery & Diagnosis", "description": "Comprehensive assessment of current state through data analysis, interviews, and observation."},
-        {"number": 2, "title": "Solution Design", "description": "Development of tailored recommendations with detailed implementation roadmaps."},
-        {"number": 3, "title": "Implementation Support", "description": "Guided execution with hands-on support, training, and progress monitoring."},
-        {"number": 4, "title": "Sustainability Planning", "description": "Transition to internal ownership with ongoing measurement and improvement systems."}
+        {"number": 1, "title": "Discovery & diagnosis", "description": "Baseline performance, map value streams, and isolate the losses that matter most to margin and service."},
+        {"number": 2, "title": "Solution design", "description": "Co-create a practical roadmap with owners, timelines, and the KPIs leadership will review weekly."},
+        {"number": 3, "title": "Implementation support", "description": "Pilot, train, and stand up daily management—on site—until the process runs without heroics."},
+        {"number": 4, "title": "Sustain & handover", "description": "Lock in standard work, visuals, and a review cadence so gains survive the next peak season."}
     ],
     "services": [
         {
             "id": "operational-process",
-            "title": "Operational Process Enhancement",
-            "short_desc": "Workflow analysis and process redesign for efficiency and quality.",
-            "description": "We conduct comprehensive workflow analysis to identify bottlenecks, redundancies, and improvement opportunities across your core business processes. Our approach combines quantitative analysis with qualitative insights from your frontline teams.",
+            "title": "Process & flow improvement",
+            "short_desc": "Remove waste, stabilise cycle time, and raise first-pass quality.",
+            "description": "We map how work actually flows—not how the SOP says it should—and redesign processes so bottlenecks, rework, and waiting time stop draining capacity and cash.",
             "bullets": [
-                "End-to-end process mapping and value stream analysis",
-                "Identification of non-value-added activities and waste elimination",
-                "Redesign of workflows for improved efficiency and quality",
-                "Implementation of standardized work procedures",
-                "Performance monitoring system establishment"
+                "Value-stream mapping and bottleneck analysis",
+                "Elimination of non-value-added work and hidden factories",
+                "Standard work for critical operations",
+                "Visual controls and short-interval control",
+                "KPI pack for throughput, quality, and lead time"
             ]
         },
         {
             "id": "performance-strategy",
-            "title": "Business Performance Strategy",
-            "short_desc": "Align operational capabilities with strategic objectives and KPIs.",
-            "description": "Aligning operational capabilities with strategic objectives requires careful planning and execution. We help organizations develop and implement performance strategies that drive measurable business outcomes.",
+            "title": "Performance system & KPI alignment",
+            "short_desc": "Connect plant metrics to the outcomes the board actually cares about.",
+            "description": "When every department tracks different numbers, firefighting wins. We build a simple performance system that cascades strategy into daily targets operators can influence.",
             "bullets": [
-                "Strategic objective translation into operational plans",
-                "Key Performance Indicator (KPI) framework development",
-                "Performance benchmarking against industry standards",
-                "Goal cascade and accountability structure design",
-                "Management dashboard and reporting system implementation"
+                "Translate strategy into a short operational scorecard",
+                "Define leading and lagging KPIs with clear ownership",
+                "Benchmark against realistic industry peers",
+                "Design accountability and escalation rhythms",
+                "Stand up management dashboards that get used"
             ]
         },
         {
             "id": "org-design",
-            "title": "Organizational Design Optimization",
-            "short_desc": "Structure follows strategy—redesign for better decisions and resource allocation.",
-            "description": "Structure follows strategy. We assess and redesign organizational structures to improve decision-making, communication flow, and resource allocation in support of your business goals.",
+            "title": "Operating model & role clarity",
+            "short_desc": "Structure, spans, and decision rights that speed execution.",
+            "description": "Growth often outpaces structure. We clarify who decides what, flatten unnecessary layers, and align roles so problems escalate to the right level—once.",
             "bullets": [
-                "Current state organizational analysis and assessment",
-                "Span of control and layer optimization",
-                "Role clarity and responsibility matrix development",
-                "Decision-rights framework establishment",
-                "Change management and transition planning"
+                "Current-state organisation and workload review",
+                "Span-of-control and layer optimisation",
+                "RACI / decision-rights design for key processes",
+                "Role profiles tied to process outcomes",
+                "Transition plan that protects customer delivery"
             ]
         },
         {
             "id": "technology-advisory",
-            "title": "Technology Integration Advisory",
-            "short_desc": "Strategic guidance on technology adoption to enhance operations.",
-            "description": "Digital transformation should serve business objectives, not dictate them. We provide strategic guidance on technology adoption and integration to enhance operational capabilities.",
+            "title": "Technology that serves operations",
+            "short_desc": "Select and adopt systems that fit how your plant actually runs.",
+            "description": "Software fails when process design is weak. We help you choose and implement ERP, WMS, and shop-floor tools that reinforce standard work—not digitise chaos.",
             "bullets": [
-                "Technology needs assessment and gap analysis",
-                "System selection criteria and vendor evaluation",
-                "Implementation roadmap development",
-                "Change management and training program design",
-                "Post-implementation optimization and support"
+                "Needs assessment and process–system gap analysis",
+                "Vendor evaluation with operational criteria",
+                "Phased implementation roadmap",
+                "Change management and role-based training",
+                "Post go-live stabilisation and optimisation"
             ]
         },
         {
             "id": "supply-chain",
-            "title": "Supply Chain & Logistics Improvement",
-            "short_desc": "Optimize end-to-end supply chain for cost, service, and resilience.",
-            "description": "Modern supply chains require resilience, visibility, and efficiency. We analyze and optimize your end-to-end supply chain to reduce costs, improve service levels, and mitigate risks.",
+            "title": "Supply chain & logistics excellence",
+            "short_desc": "Lower inventory, raise OTIF, and harden the network against disruption.",
+            "description": "We balance cost, service, and resilience across procurement, warehousing, and distribution—so growth does not automatically mean more stock and more expedites.",
             "bullets": [
-                "Supply chain network analysis and optimization",
-                "Inventory management strategy development",
-                "Logistics and distribution optimization",
-                "Supplier relationship management enhancement",
-                "Risk assessment and contingency planning"
+                "Network and flow diagnostics",
+                "Inventory policy and S&OP alignment",
+                "Warehouse layout, slotting, and pick-path design",
+                "Supplier performance and collaboration routines",
+                "Risk and contingency planning for critical SKUs"
             ]
         },
         {
             "id": "quality-management",
-            "title": "Quality Management System Development",
-            "short_desc": "Robust quality systems for consistency, compliance, and customer satisfaction.",
-            "description": "Consistent quality requires systematic approaches. We help organizations implement robust quality management systems that prevent defects, ensure compliance, and enhance customer satisfaction.",
+            "title": "Quality systems that prevent defects",
+            "short_desc": "Build QMS discipline that protects customers and certifications.",
+            "description": "Quality is a process outcome, not an inspection department. We strengthen the system that stops defects at source and makes compliance auditable without bureaucracy overload.",
             "bullets": [
-                "Quality system assessment and gap analysis",
-                "Procedure and documentation system design",
-                "Measurement and analysis framework development",
-                "Continuous improvement process implementation",
-                "Certification preparation and support"
+                "QMS maturity assessment and gap closure",
+                "Procedure and documentation that match real work",
+                "In-process control and measurement systems",
+                "Problem-solving and continuous improvement cadence",
+                "Certification readiness support where required"
             ]
         }
     ],
-    "cta_heading": "Which Operational Challenge Should We Address First?",
-    "cta_paragraph": "Our initial consultation includes a high-level assessment of your operations and identification of priority improvement areas."
+    "cta_heading": "Not sure where to start?",
+    "cta_paragraph": "Most clients begin with a focused diagnostic. In one structured conversation we identify your top constraints and whether a 90-day pilot would pay for itself."
 }

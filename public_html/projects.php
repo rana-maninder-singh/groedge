@@ -11,10 +11,10 @@ $projects = $data['projects'] ?? [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects & Achievements | GroEdge</title>
+    <title>Projects &amp; Results | GroEdge Operational Excellence</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="logo.png">
-    <meta name="description" content="Explore GroEdge's project portfolio and key achievements in operational excellence, lean transformation, and process improvement.">
+    <meta name="description" content="Selected GroEdge engagements: lead-time cuts, Lean throughput gains, DC redesign, and operational diligence—with outcomes leadership can verify.">
 </head>
 <body>
     <header>
@@ -23,8 +23,8 @@ $projects = $data['projects'] ?? [];
             <h1>GROEDGE</h1>
             <p class="tagline">OPERATIONAL EXCELLENCE CONSULTANTS</p>
         </div>
-        <h1>Projects & Achievements</h1>
-        <p>Track record of delivering measurable improvements across industries.</p>
+        <h1>Work that shows up in the numbers</h1>
+        <p>Selected engagements across manufacturing, healthcare equipment, distribution, and industrial integration.</p>
     </header>
 
     <nav>
@@ -39,8 +39,8 @@ $projects = $data['projects'] ?? [];
         <div class="section-content">
             <?php if (!empty($key_achievements)): ?>
             <div style="margin-bottom: 50px;">
-                <h2>Key Achievements</h2>
-                <p style="margin-bottom: 25px;">Our impact at a glance across engagements and years of practice.</p>
+                <h2>Impact at a glance</h2>
+                <p style="margin-bottom: 25px;">Ranges from recent programmes. Your baseline and scope determine the outcome band.</p>
                 <div class="stats-container">
                     <?php foreach ($key_achievements as $a): ?>
                     <div class="stat">
@@ -53,11 +53,11 @@ $projects = $data['projects'] ?? [];
             <?php endif; ?>
 
             <div style="margin-bottom: 50px;">
-                <h2>Selected Projects</h2>
-                <p style="margin-bottom: 30px;">A sample of our work: objectives, approach, and outcomes.</p>
+                <h2>Selected engagements</h2>
+                <p style="margin-bottom: 30px;">Anonymous where required. Outcomes are what we were measured on.</p>
 
                 <?php if (empty($projects)): ?>
-                <p style="color: #718096;">No projects have been added yet. Check back soon.</p>
+                <p style="color: #718096;">Case studies are being updated. Contact us for relevant references in your sector.</p>
                 <?php else: ?>
                 <div class="projects-list">
                     <?php foreach ($projects as $p): ?>
@@ -85,10 +85,10 @@ $projects = $data['projects'] ?? [];
             </div>
 
             <div class="cta-section">
-                <h2 style="color: white; text-align: center;">Start Your Own Success Story</h2>
-                <p style="color: rgba(255,255,255,0.9); text-align: center; max-width: 700px; margin: 20px auto 30px;">Discuss how we can deliver similar results for your organization.</p>
+                <h2 style="color: white; text-align: center;">Want results like these in your operation?</h2>
+                <p style="color: rgba(255,255,255,0.9); text-align: center; max-width: 700px; margin: 20px auto 30px;">Tell us your constraint. We will say plainly whether a similar approach fits—and what a first 90 days could look like.</p>
                 <div style="text-align: center;">
-                    <a href="contact.php" class="cta-button">Get in Touch</a>
+                    <a href="contact.php" class="cta-button">Book an assessment</a>
                 </div>
             </div>
         </div>
@@ -96,8 +96,8 @@ $projects = $data['projects'] ?? [];
 
     <footer>
         <div style="max-width: 1200px; margin: 0 auto;">
-            <p style="margin-bottom: 10px;">&copy; 2025 GroEdge Management Consulting. All Rights Reserved.</p>
-            <p style="font-size: 0.9rem; opacity: 0.8;">Transforming Operations • Driving Performance • Delivering Results</p>
+            <p style="margin-bottom: 10px;">&copy; 2026 GroEdge Management Consulting. All Rights Reserved.</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">Proof over promises.</p>
         </div>
     </footer>
 

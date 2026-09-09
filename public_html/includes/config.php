@@ -37,8 +37,8 @@ function get_config_defaults() {
         'business_hours' => 'Mon-Fri: 9:00 AM - 6:00 PM IST',
         'address' => [
             'company' => 'GroEdge Management Consulting',
-            'line1' => '123 Business Plaza, Sector 45',
-            'line2' => 'Gurugram, Haryana 122001',
+            'line1' => 'Gurugram / National Capital Region',
+            'line2' => 'On-site delivery across India (meetings by appointment)',
             'country' => 'India'
         ],
         'form_to_email' => 'info@groedge.in',
