@@ -2,50 +2,80 @@
 define('DATA_DIR', __DIR__ . '/data');
 require_once __DIR__ . '/includes/config.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = trim($_POST['name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $phone = trim($_POST['phone'] ?? '');
-    $company = trim($_POST['company'] ?? '');
-    $industry = trim($_POST['industry'] ?? '');
-    $employees = trim($_POST['employees'] ?? '');
-    $service = trim($_POST['service'] ?? '');
-    $challenge = trim($_POST['challenge'] ?? '');
-    $message = trim($_POST['message'] ?? '');
+$form_values = [
+    'name' => '',
+    'email' => '',
+    'phone' => '',
+    'company' => '',
+    'industry' => '',
+    'employees' => '',
+    'service' => '',
+    'challenge' => '',
+    'message' => ''
+];
+$form_errors = [];
+$status = $_GET['status'] ?? '';
 
-    $submission = [
-        'name' => $name,
-        'email' => $email,
-        'phone' => $phone,
-        'company' => $company,
-        'industry' => $industry,
-        'employees' => $employees,
-        'service' => $service,
-        'challenge' => $challenge,
-        'message' => $message
-    ];
-    save_submission($submission);
-
-    $cfg = get_config();
-    $to = $cfg->form_to_email ?? 'info@groedge.in';
-    $bcc = $cfg->form_bcc ?? 'rajest@groedge.in, sales@groedge.in';
-    $subject = "New Contact Form Submission from " . htmlspecialchars($name);
-    $body = "Name: $name\nEmail: $email\nPhone: $phone\nCompany: $company\n";
-    $body .= "Industry: $industry\nCompany Size: $employees\nPrimary Interest: $service\n\n";
-    $body .= "Biggest Operational Challenge:\n$challenge\n\n";
-    if ($message) {
-        $body .= "Additional Details:\n$message\n";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    foreach ($form_values as $key => $_) {
+        $form_values[$key] = trim((string) ($_POST[$key] ?? ''));
     }
-    $headers = "From: $email\r\nBcc: $bcc";
 
-    $mailOk = @mail($to, $subject, $body, $headers);
-    header("Location: contact.php?status=" . ($mailOk ? "success" : "error"));
-    exit;
+    if (strlen($form_values['name']) < 2) {
+        $form_errors['name'] = 'Full name is required (at least 2 characters).';
+    }
+    if (!filter_var($form_values['email'], FILTER_VALIDATE_EMAIL)) {
+        $form_errors['email'] = 'Please enter a valid business email.';
+    }
+    $phone_digits = preg_replace('/\D/', '', $form_values['phone']);
+    if (strlen($phone_digits) < 10) {
+        $form_errors['phone'] = 'Phone number must include at least 10 digits.';
+    }
+    if (strlen($form_values['company']) < 2) {
+        $form_errors['company'] = 'Company name is required.';
+    }
+    if ($form_values['industry'] === '') {
+        $form_errors['industry'] = 'Please select your industry.';
+    }
+    if (strlen($form_values['challenge']) < 10) {
+        $form_errors['challenge'] = 'Please describe your challenge (at least 10 characters).';
+    }
+
+    if (empty($form_errors)) {
+        $saved = save_submission($form_values);
+        if (!$saved) {
+            $status = 'save_error';
+        } else {
+            $cfg = get_config();
+            $to = sanitize_header_value($cfg->form_to_email ?? 'info@groedge.in');
+            $bcc = sanitize_header_value($cfg->form_bcc ?? 'rajesh@groedge.in, sales@groedge.in');
+            $from = sanitize_header_value($cfg->email_info ?? 'info@groedge.in');
+            $reply = sanitize_header_value($form_values['email']);
+            $safe_name = sanitize_header_value($form_values['name']);
+            $subject = 'New Contact Form Submission from ' . $safe_name;
+
+            $body = "Name: {$form_values['name']}\nEmail: {$form_values['email']}\nPhone: {$form_values['phone']}\nCompany: {$form_values['company']}\n";
+            $body .= "Industry: {$form_values['industry']}\nCompany Size: {$form_values['employees']}\nPrimary Interest: {$form_values['service']}\n\n";
+            $body .= "Biggest Operational Challenge:\n{$form_values['challenge']}\n\n";
+            if ($form_values['message'] !== '') {
+                $body .= "Additional Details:\n{$form_values['message']}\n";
+            }
+
+            $headers = "From: {$from}\r\nReply-To: {$reply}\r\n";
+            if ($bcc !== '') {
+                $headers .= "Bcc: {$bcc}\r\n";
+            }
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+            $mailOk = @mail($to, $subject, $body, $headers);
+            header('Location: contact.php?status=' . ($mailOk ? 'success' : 'error'));
+            exit;
+        }
+    }
 }
 
 $cfg = get_config();
 $addr = $cfg->address ?? (object)['company' => '', 'line1' => '', 'line2' => '', 'country' => ''];
-$status = $_GET['status'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,6 +117,10 @@ $status = $_GET['status'] ?? '';
             <div class="form-status success" style="background: #d4edda; color: #155724; padding: 15px; border-radius: 6px; margin-bottom: 25px;">Thank you! Your request has been submitted. We'll contact you within 24 business hours.</div>
             <?php elseif ($status === 'error'): ?>
             <div class="form-status error" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px;">Your message was saved. There was a problem sending the email; we'll still get in touch.</div>
+            <?php elseif ($status === 'save_error'): ?>
+            <div class="form-status error" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px;">We could not save your request. Please try again or email us directly.</div>
+            <?php elseif (!empty($form_errors)): ?>
+            <div class="form-status error" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 25px;">Please correct the highlighted fields and submit again.</div>
             <?php endif; ?>
 
             <div style="margin-bottom: 40px;">
@@ -124,70 +158,85 @@ $status = $_GET['status'] ?? '';
                     <form id="contactForm" action="contact.php" method="post" onsubmit="return validateForm()">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                            <div class="error-message" id="name-error"></div>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" value="<?php echo htmlspecialchars($form_values['name']); ?>" required>
+                            <div class="error-message" id="name-error"><?php echo htmlspecialchars($form_errors['name'] ?? ''); ?></div>
                         </div>
                         <div class="form-group">
                             <label for="email">Business Email *</label>
-                            <input type="email" id="email" name="email" placeholder="name@company.com" required>
-                            <div class="error-message" id="email-error"></div>
+                            <input type="email" id="email" name="email" placeholder="name@company.com" value="<?php echo htmlspecialchars($form_values['email']); ?>" required>
+                            <div class="error-message" id="email-error"><?php echo htmlspecialchars($form_errors['email'] ?? ''); ?></div>
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" placeholder="<?php echo htmlspecialchars($cfg->contact_phone ?? ''); ?>" required>
-                            <div class="error-message" id="phone-error"></div>
+                            <input type="tel" id="phone" name="phone" placeholder="<?php echo htmlspecialchars($cfg->contact_phone ?? ''); ?>" value="<?php echo htmlspecialchars($form_values['phone']); ?>" required>
+                            <div class="error-message" id="phone-error"><?php echo htmlspecialchars($form_errors['phone'] ?? ''); ?></div>
                         </div>
                         <div class="form-group">
                             <label for="company">Company Name *</label>
-                            <input type="text" id="company" name="company" placeholder="Your company name" required>
-                            <div class="error-message" id="company-error"></div>
+                            <input type="text" id="company" name="company" placeholder="Your company name" value="<?php echo htmlspecialchars($form_values['company']); ?>" required>
+                            <div class="error-message" id="company-error"><?php echo htmlspecialchars($form_errors['company'] ?? ''); ?></div>
                         </div>
                         <div class="form-group">
                             <label for="industry">Industry *</label>
                             <select id="industry" name="industry" required>
                                 <option value="">Select your industry</option>
-                                <option value="manufacturing">Manufacturing</option>
-                                <option value="pharmaceutical">Pharmaceuticals</option>
-                                <option value="chemical">Chemicals</option>
-                                <option value="engineering">Engineering</option>
-                                <option value="textiles">Textiles & Garments</option>
-                                <option value="logistics">Logistics & Supply Chain</option>
-                                <option value="other">Other</option>
+                                <?php
+                                $industries = [
+                                    'manufacturing' => 'Manufacturing',
+                                    'pharmaceutical' => 'Pharmaceuticals',
+                                    'chemical' => 'Chemicals',
+                                    'engineering' => 'Engineering',
+                                    'textiles' => 'Textiles & Garments',
+                                    'logistics' => 'Logistics & Supply Chain',
+                                    'other' => 'Other',
+                                ];
+                                foreach ($industries as $val => $label):
+                                ?>
+                                <option value="<?php echo $val; ?>"<?php echo $form_values['industry'] === $val ? ' selected' : ''; ?>><?php echo $label; ?></option>
+                                <?php endforeach; ?>
                             </select>
-                            <div class="error-message" id="industry-error"></div>
+                            <div class="error-message" id="industry-error"><?php echo htmlspecialchars($form_errors['industry'] ?? ''); ?></div>
                         </div>
                         <div class="form-group">
                             <label for="employees">Company Size</label>
                             <select id="employees" name="employees">
                                 <option value="">Select number of employees</option>
-                                <option value="1-50">1-50 Employees</option>
-                                <option value="51-200">51-200 Employees</option>
-                                <option value="201-500">201-500 Employees</option>
-                                <option value="501-1000">501-1000 Employees</option>
-                                <option value="1000+">1000+ Employees</option>
+                                <?php
+                                $sizes = ['1-50' => '1-50 Employees', '51-200' => '51-200 Employees', '201-500' => '201-500 Employees', '501-1000' => '501-1000 Employees', '1000+' => '1000+ Employees'];
+                                foreach ($sizes as $val => $label):
+                                ?>
+                                <option value="<?php echo htmlspecialchars($val); ?>"<?php echo $form_values['employees'] === $val ? ' selected' : ''; ?>><?php echo $label; ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="service">Primary Interest</label>
                             <select id="service" name="service">
                                 <option value="">Select area of interest</option>
-                                <option value="process">Process Optimization</option>
-                                <option value="digital">Digital Transformation</option>
-                                <option value="supply">Supply Chain Management</option>
-                                <option value="quality">Quality Systems (QMS)</option>
-                                <option value="manufacturing">Manufacturing Excellence</option>
-                                <option value="cost">Cost Reduction</option>
-                                <option value="other">Other</option>
+                                <?php
+                                $services = [
+                                    'process' => 'Process Optimization',
+                                    'digital' => 'Digital Transformation',
+                                    'supply' => 'Supply Chain Management',
+                                    'quality' => 'Quality Systems (QMS)',
+                                    'manufacturing' => 'Manufacturing Excellence',
+                                    'cost' => 'Cost Reduction',
+                                    'other' => 'Other',
+                                ];
+                                foreach ($services as $val => $label):
+                                ?>
+                                <option value="<?php echo $val; ?>"<?php echo $form_values['service'] === $val ? ' selected' : ''; ?>><?php echo $label; ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="challenge">Biggest Operational Challenge *</label>
-                            <textarea id="challenge" name="challenge" rows="4" placeholder="Briefly describe your biggest operational challenge..." required></textarea>
-                            <div class="error-message" id="challenge-error"></div>
+                            <textarea id="challenge" name="challenge" rows="4" placeholder="Briefly describe your biggest operational challenge..." required><?php echo htmlspecialchars($form_values['challenge']); ?></textarea>
+                            <div class="error-message" id="challenge-error"><?php echo htmlspecialchars($form_errors['challenge'] ?? ''); ?></div>
                         </div>
                         <div class="form-group">
                             <label for="message">Additional Details</label>
-                            <textarea id="message" name="message" rows="4" placeholder="Any other details you'd like to share..."></textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="Any other details you'd like to share..."><?php echo htmlspecialchars($form_values['message']); ?></textarea>
                         </div>
                         <div class="form-group" style="margin-top: 30px;">
                             <button type="submit" class="submit-btn">

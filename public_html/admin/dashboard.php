@@ -52,6 +52,7 @@ $submissions = get_submissions();
                     <th>Company</th>
                     <th>Email</th>
                     <th>Industry</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>

@@ -10,6 +10,7 @@ $message = '';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_csrf();
     if (isset($_POST['delete_achievement']) && is_numeric($_POST['delete_achievement'])) {
         $i = (int) $_POST['delete_achievement'];
         if (isset($key_achievements[$i])) {
@@ -149,6 +150,7 @@ if (isset($_GET['msg'])) {
         <h2>Key achievements (stats on projects page)</h2>
         <p style="color:#718096; font-size:0.9rem; margin-bottom:16px;">These appear as the highlight stats at the top of the Projects page (e.g. "15+ Years Experience").</p>
         <form method="post" action="">
+            <?php echo csrf_field(); ?>
             <div id="achievements-list">
                 <?php foreach ($key_achievements as $i => $a): ?>
                 <div class="ach-row">
@@ -173,6 +175,7 @@ if (isset($_GET['msg'])) {
         <h2>Projects</h2>
         <p style="color:#718096; font-size:0.9rem; margin-bottom:16px;">Each project is shown as a card on the Projects page. Achievements: one per line in the textarea.</p>
         <form method="post" action="">
+            <?php echo csrf_field(); ?>
             <div id="projects-list">
                 <?php foreach ($projects as $i => $p): ?>
                 <div class="proj-block">

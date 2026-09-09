@@ -1,6 +1,5 @@
 // contact-script.js - Additional contact form functionality
 
-// Global validation function (called from form onsubmit)
 function validateForm() {
     var isValid = true;
     var fields = [
@@ -18,10 +17,14 @@ function validateForm() {
         errEl.textContent = '';
         if (!el) return;
         var val = (el.value || '').trim();
+        var digits = val.replace(/\D/g, '');
         if (f.label && !val) {
             errEl.textContent = f.label + ' is required.';
             isValid = false;
-        } else if (f.minLen && val.length < f.minLen) {
+        } else if (f.id === 'phone' && digits.length < 10) {
+            errEl.textContent = 'Phone number must include at least 10 digits.';
+            isValid = false;
+        } else if (f.minLen && f.id !== 'phone' && val.length < f.minLen) {
             errEl.textContent = f.label + ' must be at least ' + f.minLen + ' characters.';
             isValid = false;
         } else if (f.pattern && !f.pattern.test(val)) {
@@ -32,67 +35,48 @@ function validateForm() {
     return isValid;
 }
 
+function readSavedForm() {
+    try {
+        var raw = localStorage.getItem('groedgeContactForm');
+        if (!raw) return {};
+        var data = JSON.parse(raw);
+        return data && typeof data === 'object' ? data : {};
+    } catch (e) {
+        try { localStorage.removeItem('groedgeContactForm'); } catch (ignore) {}
+        return {};
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Phone number formatting
-    const phoneInput = document.getElementById('phone');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length > 0) {
-                value = '+' + value;
-                if (value.length > 4) {
-                    value = value.slice(0, 4) + ' ' + value.slice(4);
-                }
-                if (value.length > 9) {
-                    value = value.slice(0, 9) + ' ' + value.slice(9);
-                }
-                if (value.length > 14) {
-                    value = value.slice(0, 14);
-                }
-            }
-            
-            e.target.value = value;
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+
+    // Prefer server-rendered values / error state over local draft
+    var hasServerErrors = Array.prototype.some.call(document.querySelectorAll('.error-message'), function(el) {
+        return (el.textContent || '').trim().length > 0;
+    });
+    var nameField = form.elements.name;
+    var hasServerValues = !!(nameField && nameField.value);
+    if (!hasServerErrors && !hasServerValues) {
+        var savedData = readSavedForm();
+        Object.keys(savedData).forEach(function(key) {
+            var field = form.elements[key];
+            if (field) field.value = savedData[key];
         });
     }
-    
-    // Form field auto-save to localStorage
-    const form = document.getElementById('contactForm');
-    if (form) {
-        // Load saved form data
-        const savedData = JSON.parse(localStorage.getItem('groedgeContactForm')) || {};
-        Object.keys(savedData).forEach(key => {
-            const field = form.elements[key];
-            if (field) {
-                field.value = savedData[key];
-            }
-        });
-        
-        // Save form data on input
-        form.addEventListener('input', function(e) {
-            if (e.target.name) {
-                const formData = JSON.parse(localStorage.getItem('groedgeContactForm')) || {};
-                formData[e.target.name] = e.target.value;
-                localStorage.setItem('groedgeContactForm', JSON.stringify(formData));
-            }
-        });
-        
-        // Clear saved data on successful submission
-        form.addEventListener('submit', function() {
-            setTimeout(() => {
-                localStorage.removeItem('groedgeContactForm');
-            }, 1000);
-        });
-    }
-    
-    // Add map interaction (placeholder)
-    const mapPlaceholder = document.querySelector('.map-placeholder');
-    if (mapPlaceholder) {
-        mapPlaceholder.addEventListener('click', function() {
-            this.innerHTML = '<p>📍 Map integration coming soon!</p><p>For now, please use our contact information above.</p>';
-            this.style.backgroundColor = '#d4edda';
-            this.style.color = '#155724';
-            this.style.cursor = 'default';
-        });
-    }
+
+    form.addEventListener('input', function(e) {
+        if (!e.target.name) return;
+        var formData = readSavedForm();
+        formData[e.target.name] = e.target.value;
+        try {
+            localStorage.setItem('groedgeContactForm', JSON.stringify(formData));
+        } catch (ignore) {}
+    });
+
+    form.addEventListener('submit', function() {
+        setTimeout(function() {
+            try { localStorage.removeItem('groedgeContactForm'); } catch (ignore) {}
+        }, 1000);
+    });
 });

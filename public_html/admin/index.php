@@ -3,21 +3,28 @@ require_once 'auth.php';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_csrf();
     $password = $_POST['password'] ?? '';
     $cfg = get_config();
     $hash = $cfg->admin_password_hash ?? '';
 
     if (empty($hash)) {
-        if (strlen($password) >= 6) {
+        if (strlen($password) >= 8) {
             $cfg->admin_password_hash = password_hash($password, PASSWORD_DEFAULT);
-            save_config($cfg);
-            $_SESSION['admin_logged_in'] = true;
-            header('Location: dashboard.php');
-            exit;
+            if (!save_config($cfg)) {
+                $error = 'Could not save password. Check that data/site-config.json is writable.';
+            } else {
+                session_regenerate_id(true);
+                $_SESSION['admin_logged_in'] = true;
+                header('Location: dashboard.php');
+                exit;
+            }
+        } else {
+            $error = 'Set a password (at least 8 characters) for first-time setup.';
         }
-        $error = 'Set a password (at least 6 characters) for first-time setup.';
     } else {
         if (password_verify($password, $hash)) {
+            session_regenerate_id(true);
             $_SESSION['admin_logged_in'] = true;
             header('Location: dashboard.php');
             exit;
@@ -48,6 +55,7 @@ if (!empty($_SESSION['admin_logged_in'])) {
         .error { color: #c53030; font-size: 0.9rem; margin-bottom: 15px; }
         .back { display: inline-block; margin-top: 20px; color: #4a5568; text-decoration: none; font-size: 0.9rem; }
         .back:hover { color: #2c5282; }
+        .warn { font-size:0.85rem; color:#c05621; margin-top:15px; background:#fffaf0; padding:10px; border-radius:6px; }
     </style>
 </head>
 <body>
@@ -55,13 +63,17 @@ if (!empty($_SESSION['admin_logged_in'])) {
         <h1>GroEdge Admin</h1>
         <?php if ($error): ?><p class="error"><?php echo htmlspecialchars($error); ?></p><?php endif; ?>
         <form method="post" action="">
-            <input type="password" name="password" placeholder="Password" required autofocus>
+            <?php echo csrf_field(); ?>
+            <input type="password" name="password" placeholder="Password" required autofocus<?php
+                $cfgCheck = get_config();
+                echo empty($cfgCheck->admin_password_hash) ? ' minlength="8" autocomplete="new-password"' : ' autocomplete="current-password"';
+            ?>>
             <button type="submit">Log in</button>
         </form>
         <?php
         $cfg = get_config();
         if (empty($cfg->admin_password_hash)) {
-            echo '<p style="font-size:0.85rem; color:#718096; margin-top:15px;">First time? Enter a new password (min 6 characters) to set it.</p>';
+            echo '<p class="warn">First-time setup: choose a strong password (min 8 characters) now. Until you do, anyone who reaches this page can claim admin access.</p>';
         }
         ?>
         <a href="../index.html" class="back">← Back to site</a>

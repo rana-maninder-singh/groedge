@@ -22,3 +22,5 @@ www/
 cgi-bin.zip
 # leftover nested clone dir (safe to delete locally)
 groedge/
+
+groedge-site.zip

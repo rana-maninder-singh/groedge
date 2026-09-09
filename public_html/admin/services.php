@@ -7,6 +7,7 @@ $message = '';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_services'])) {
+    require_csrf();
     $data['page_title'] = trim($_POST['page_title'] ?? '');
     $data['page_intro'] = trim($_POST['page_intro'] ?? '');
     $data['intro_paragraph'] = trim($_POST['intro_paragraph'] ?? '');
@@ -122,6 +123,7 @@ while (count($approach_steps) < 4) { $approach_steps[] = ['number' => count($app
     <?php if ($error): ?><p class="err"><?php echo htmlspecialchars($error); ?></p><?php endif; ?>
 
     <form method="post" action="">
+        <?php echo csrf_field(); ?>
         <section>
             <h2>Page header</h2>
             <div class="form-group">

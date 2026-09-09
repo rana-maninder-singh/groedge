@@ -7,6 +7,7 @@ $saved = false;
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_csrf();
     $cfg->contact_person = trim($_POST['contact_person'] ?? '');
     $cfg->contact_phone = trim($_POST['contact_phone'] ?? '');
     $cfg->contact_phone_raw = preg_replace('/\D/', '', $cfg->contact_phone);
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'country' => trim($_POST['addr_country'] ?? '')
     ];
 
-    if (isset($_POST['new_password']) && strlen($_POST['new_password']) >= 6) {
+    if (isset($_POST['new_password']) && strlen($_POST['new_password']) >= 8) {
         $cfg->admin_password_hash = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
     }
 
@@ -77,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if ($error): ?><p class="err"><?php echo htmlspecialchars($error); ?></p><?php endif; ?>
 
     <form method="post" action="">
+        <?php echo csrf_field(); ?>
         <section>
             <h2>Contact information (shown on contact page)</h2>
             <div class="form-group">
@@ -142,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Change admin password</h2>
             <div class="form-group">
                 <label>New password (leave blank to keep current)</label>
-                <input type="password" name="new_password" placeholder="Min 6 characters">
+                <input type="password" name="new_password" placeholder="Min 8 characters" minlength="8" autocomplete="new-password">
             </div>
         </section>
 

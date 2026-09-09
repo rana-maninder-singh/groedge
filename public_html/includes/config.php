@@ -10,31 +10,46 @@ if (!defined('DATA_DIR')) {
 function get_config() {
     $path = DATA_DIR . '/site-config.json';
     if (!is_file($path)) {
-        return (object) [
-            'contact_person' => 'Mr. Rajesh Pal',
-            'contact_phone' => '+91 98702 55501',
-            'contact_phone_raw' => '919870255501',
-            'email_contact' => 'rajest@groedge.in',
-            'email_info' => 'info@groedge.in',
-            'email_sales' => 'sales@groedge.in',
-            'business_hours' => 'Mon-Fri: 9:00 AM - 6:00 PM IST',
-            'address' => (object) [
-                'company' => 'GroEdge Management Consulting',
-                'line1' => '123 Business Plaza, Sector 45',
-                'line2' => 'Gurugram, Haryana 122001',
-                'country' => 'India'
-            ],
-            'form_to_email' => 'info@groedge.in',
-            'form_bcc' => 'rajest@groedge.in, sales@groedge.in',
-            'admin_password_hash' => ''
-        ];
+        return get_config_defaults();
     }
     $json = file_get_contents($path);
     $data = json_decode($json);
-    if (!isset($data->address)) {
+    if (!is_object($data)) {
+        // Fail closed for auth: do not fall back to an empty password hash.
+        $fallback = get_config_defaults();
+        $fallback->admin_password_hash = '!invalid!';
+        return $fallback;
+    }
+    if (!isset($data->address) || !is_object($data->address)) {
         $data->address = (object) ['company' => '', 'line1' => '', 'line2' => '', 'country' => ''];
     }
     return $data;
+}
+
+function get_config_defaults() {
+    return json_decode(json_encode([
+        'contact_person' => 'Mr. Rajesh Pal',
+        'contact_phone' => '+91 98702 55501',
+        'contact_phone_raw' => '919870255501',
+        'email_contact' => 'rajesh@groedge.in',
+        'email_info' => 'info@groedge.in',
+        'email_sales' => 'sales@groedge.in',
+        'business_hours' => 'Mon-Fri: 9:00 AM - 6:00 PM IST',
+        'address' => [
+            'company' => 'GroEdge Management Consulting',
+            'line1' => '123 Business Plaza, Sector 45',
+            'line2' => 'Gurugram, Haryana 122001',
+            'country' => 'India'
+        ],
+        'form_to_email' => 'info@groedge.in',
+        'form_bcc' => 'rajesh@groedge.in, sales@groedge.in',
+        'admin_password_hash' => ''
+    ]));
+}
+
+/** Strip CR/LF so values cannot inject mail/HTTP headers. */
+function sanitize_header_value($value) {
+    return str_replace(["\r", "\n", "\0"], '', (string) $value);
 }
 
 function save_config($config) {
