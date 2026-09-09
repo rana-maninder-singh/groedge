@@ -1,0 +1,39 @@
+# Deploy GroEdge public_html to server on push to main.
+# Enable: add repo to GitHub, set secrets (FTP_HOST, FTP_USER, FTP_PASSWORD, FTP_REMOTE_PATH), then push.
+#
+# Required secrets (Settings → Secrets and variables → Actions):
+#   FTP_HOST     - e.g. ftp.groedge.in or your server hostname
+#   FTP_USER     - FTP username
+#   FTP_PASSWORD - FTP password
+#   FTP_REMOTE_PATH - e.g. /public_html or /home/username/public_html (remote path to web root)
+#
+# Optional: FTP_PORT (default 21), or use SFTP_PORT=22 and we can switch to SFTP.
+
+name: Deploy to server
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # Allow manual run from Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_REMOTE_PATH }}
+          local-dir: ./public_html/
+          exclude: |
+            **/.git*
+            **/.DS_Store
+            **/data/submissions.json
+            **/admin.zip
+          dangerous-clean-slate: false

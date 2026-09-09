@@ -1,0 +1,4 @@
+# Prevent web access to data files (config and submissions)
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>

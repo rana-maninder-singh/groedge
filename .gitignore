@@ -1,0 +1,24 @@
+# Don't commit server/local data (optional: remove data/ line if you want to track config)
+public_html/data/submissions.json
+data/submissions.json
+public_html/admin.zip
+# Keep site-config.json in repo so default config is deployed; uncomment next line to ignore it too
+# public_html/data/site-config.json
+
+# OS and IDE
+.DS_Store
+Thumbs.db
+*.code-workspace
+
+# Hosting folders / mirrors (not part of deploy)
+mail/
+tmp/
+logs/
+access-logs/
+etc/
+ssl/
+public_ftp/
+www/
+cgi-bin.zip
+# leftover nested clone dir (safe to delete locally)
+groedge/

@@ -1,0 +1,78 @@
+{
+    "key_achievements": [
+        {
+            "label": "15+",
+            "description": "Years Combined Experience"
+        },
+        {
+            "label": "47%",
+            "description": "Average Process Efficiency Gain"
+        },
+        {
+            "label": "28%",
+            "description": "Typical Operational Cost Reduction"
+        },
+        {
+            "label": "98%",
+            "description": "Client Project Satisfaction"
+        }
+    ],
+    "projects": [
+        {
+            "id": "proj-1",
+            "title": "End-to-End Supply Chain Optimization",
+            "client": "Leading Automotive Components Manufacturer",
+            "industry": "Manufacturing",
+            "year": "2024",
+            "description": "GroEdge partnered with a Tier-1 automotive supplier to redesign their procurement-to-delivery flow, reducing lead times and inventory while improving on-time delivery.",
+            "achievements": [
+                "35% reduction in average lead time",
+                "22% decrease in finished goods inventory",
+                "On-time delivery improved from 78% to 96%",
+                "Standardized processes across 4 regional plants"
+            ]
+        },
+        {
+            "id": "proj-2",
+            "title": "Lean Operations Transformation",
+            "client": "Mid-size Healthcare Equipment Company",
+            "industry": "Healthcare",
+            "year": "2024",
+            "description": "A full lean transformation engagement focusing on value stream mapping, waste elimination, and standard work across production and support functions.",
+            "achievements": [
+                "40% improvement in throughput in key product lines",
+                "Setup time reduced by 60% on critical equipment",
+                "First-pass quality improved from 91% to 98.5%",
+                "Staff trained and certified in lean fundamentals"
+            ]
+        },
+        {
+            "id": "proj-3",
+            "title": "Warehouse & Distribution Centre Redesign",
+            "client": "National Consumer Goods Distributor",
+            "industry": "Logistics",
+            "year": "2023",
+            "description": "Redesigned layout, slotting, and picking processes for a 80,000 sq ft distribution centre to support 30% volume growth without proportional cost increase.",
+            "achievements": [
+                "Pick-path distance reduced by 45%",
+                "Daily throughput capacity increased by 38%",
+                "Labour cost per order reduced by 25%",
+                "Safety incidents reduced to zero over 12 months"
+            ]
+        },
+        {
+            "id": "proj-4",
+            "title": "Operational Due Diligence & Integration",
+            "client": "Private Equity Portfolio Company",
+            "industry": "Professional Services",
+            "year": "2023",
+            "description": "Operational due diligence for an acquisition followed by post-merger integration support to consolidate two manufacturing sites and align processes.",
+            "achievements": [
+                "Identified €2.1M annual synergy opportunities",
+                "Successful consolidation of two sites within 8 months",
+                "Unified ERP and reporting within first year",
+                "Zero disruption to key customer deliveries"
+            ]
+        }
+    ]
+}

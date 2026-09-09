@@ -1,0 +1,99 @@
+{
+    "page_title": "Strategic Consulting Services",
+    "page_intro": "Our comprehensive suite of consulting services is designed to address the complete spectrum of operational challenges, delivering sustainable improvements across your organization.",
+    "intro_paragraph": "Each of our consulting services is delivered through a structured methodology that combines analytical rigor with practical implementation support. We focus on creating solutions that are tailored to your specific business context while incorporating industry best practices.",
+    "pillars": [
+        {"title": "Analysis", "description": "Deep diagnostic assessment"},
+        {"title": "Design", "description": "Tailored solution development"},
+        {"title": "Implement", "description": "Phased execution support"},
+        {"title": "Sustain", "description": "Long-term capability building"}
+    ],
+    "approach_steps": [
+        {"number": 1, "title": "Discovery & Diagnosis", "description": "Comprehensive assessment of current state through data analysis, interviews, and observation."},
+        {"number": 2, "title": "Solution Design", "description": "Development of tailored recommendations with detailed implementation roadmaps."},
+        {"number": 3, "title": "Implementation Support", "description": "Guided execution with hands-on support, training, and progress monitoring."},
+        {"number": 4, "title": "Sustainability Planning", "description": "Transition to internal ownership with ongoing measurement and improvement systems."}
+    ],
+    "services": [
+        {
+            "id": "operational-process",
+            "title": "Operational Process Enhancement",
+            "short_desc": "Workflow analysis and process redesign for efficiency and quality.",
+            "description": "We conduct comprehensive workflow analysis to identify bottlenecks, redundancies, and improvement opportunities across your core business processes. Our approach combines quantitative analysis with qualitative insights from your frontline teams.",
+            "bullets": [
+                "End-to-end process mapping and value stream analysis",
+                "Identification of non-value-added activities and waste elimination",
+                "Redesign of workflows for improved efficiency and quality",
+                "Implementation of standardized work procedures",
+                "Performance monitoring system establishment"
+            ]
+        },
+        {
+            "id": "performance-strategy",
+            "title": "Business Performance Strategy",
+            "short_desc": "Align operational capabilities with strategic objectives and KPIs.",
+            "description": "Aligning operational capabilities with strategic objectives requires careful planning and execution. We help organizations develop and implement performance strategies that drive measurable business outcomes.",
+            "bullets": [
+                "Strategic objective translation into operational plans",
+                "Key Performance Indicator (KPI) framework development",
+                "Performance benchmarking against industry standards",
+                "Goal cascade and accountability structure design",
+                "Management dashboard and reporting system implementation"
+            ]
+        },
+        {
+            "id": "org-design",
+            "title": "Organizational Design Optimization",
+            "short_desc": "Structure follows strategy—redesign for better decisions and resource allocation.",
+            "description": "Structure follows strategy. We assess and redesign organizational structures to improve decision-making, communication flow, and resource allocation in support of your business goals.",
+            "bullets": [
+                "Current state organizational analysis and assessment",
+                "Span of control and layer optimization",
+                "Role clarity and responsibility matrix development",
+                "Decision-rights framework establishment",
+                "Change management and transition planning"
+            ]
+        },
+        {
+            "id": "technology-advisory",
+            "title": "Technology Integration Advisory",
+            "short_desc": "Strategic guidance on technology adoption to enhance operations.",
+            "description": "Digital transformation should serve business objectives, not dictate them. We provide strategic guidance on technology adoption and integration to enhance operational capabilities.",
+            "bullets": [
+                "Technology needs assessment and gap analysis",
+                "System selection criteria and vendor evaluation",
+                "Implementation roadmap development",
+                "Change management and training program design",
+                "Post-implementation optimization and support"
+            ]
+        },
+        {
+            "id": "supply-chain",
+            "title": "Supply Chain & Logistics Improvement",
+            "short_desc": "Optimize end-to-end supply chain for cost, service, and resilience.",
+            "description": "Modern supply chains require resilience, visibility, and efficiency. We analyze and optimize your end-to-end supply chain to reduce costs, improve service levels, and mitigate risks.",
+            "bullets": [
+                "Supply chain network analysis and optimization",
+                "Inventory management strategy development",
+                "Logistics and distribution optimization",
+                "Supplier relationship management enhancement",
+                "Risk assessment and contingency planning"
+            ]
+        },
+        {
+            "id": "quality-management",
+            "title": "Quality Management System Development",
+            "short_desc": "Robust quality systems for consistency, compliance, and customer satisfaction.",
+            "description": "Consistent quality requires systematic approaches. We help organizations implement robust quality management systems that prevent defects, ensure compliance, and enhance customer satisfaction.",
+            "bullets": [
+                "Quality system assessment and gap analysis",
+                "Procedure and documentation system design",
+                "Measurement and analysis framework development",
+                "Continuous improvement process implementation",
+                "Certification preparation and support"
+            ]
+        }
+    ],
+    "cta_heading": "Which Operational Challenge Should We Address First?",
+    "cta_paragraph": "Our initial consultation includes a high-level assessment of your operations and identification of priority improvement areas."
+}

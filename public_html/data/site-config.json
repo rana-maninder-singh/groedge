@@ -1,0 +1,18 @@
+{
+    "contact_person": "Mr. Rajesh Pal",
+    "contact_phone": "+91 98702 55501",
+    "contact_phone_raw": "919870255501",
+    "email_contact": "rajest@groedge.in",
+    "email_info": "info@groedge.in",
+    "email_sales": "sales@groedge.in",
+    "business_hours": "Mon-Fri: 9:00 AM - 6:00 PM IST",
+    "address": {
+        "company": "GroEdge Management Consulting",
+        "line1": "123 Business Plaza, Sector 45",
+        "line2": "Gurugram, Haryana 122001",
+        "country": "India"
+    },
+    "form_to_email": "info@groedge.in",
+    "form_bcc": "rajest@groedge.in, sales@groedge.in",
+    "admin_password_hash": ""
+}
