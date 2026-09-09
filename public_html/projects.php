@@ -17,23 +17,25 @@ $projects = $data['projects'] ?? [];
     <meta name="description" content="Selected GroEdge engagements: lead-time cuts, Lean throughput gains, DC redesign, and operational diligence—with outcomes leadership can verify.">
 </head>
 <body>
-    <header>
-        <div class="logo logo-dark">
-            <a href="index.html"><img src="logo.png" alt="GroEdge" class="logo-img"></a>
-            <h1>GROEDGE</h1>
-            <p class="tagline">OPERATIONAL EXCELLENCE CONSULTANTS</p>
-        </div>
-        <h1>Work that shows up in the numbers</h1>
-        <p>Selected engagements across manufacturing, healthcare equipment, distribution, and industrial integration.</p>
-    </header>
+    <div class="site-top">
+        <a href="index.html" class="brand">
+            <img src="logo.png" alt="GroEdge" class="logo-img">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.php">Services</a>
+            <a href="projects.php">Projects</a>
+            <a href="contact.php">Contact</a>
+        </nav>
+    </div>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.php">Services</a>
-        <a href="projects.php">Projects</a>
-        <a href="contact.php">Contact</a>
-    </nav>
+    <section class="page-banner">
+        <div class="page-banner-inner">
+            <h1>Work that shows up in the numbers</h1>
+            <p>Selected engagements across manufacturing, healthcare equipment, distribution, and industrial integration.</p>
+        </div>
+    </section>
 
     <div class="container">
         <div class="section-content">

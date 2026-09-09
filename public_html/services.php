@@ -23,23 +23,25 @@ $cta_paragraph = $data['cta_paragraph'] ?? '';
     <meta name="description" content="GroEdge services: process &amp; flow, performance systems, operating model, technology fit, supply chain, and quality systems—implemented on site.">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.html"><img src="logo.png" alt="GroEdge" class="logo-img"></a>
-            <h1>GROEDGE</h1>
-            <p class="tagline">OPERATIONAL EXCELLENCE CONSULTANTS</p>
-        </div>
-        <h1><?php echo htmlspecialchars($page_title); ?></h1>
-        <p><?php echo htmlspecialchars($page_intro); ?></p>
-    </header>
+    <div class="site-top">
+        <a href="index.html" class="brand">
+            <img src="logo.png" alt="GroEdge" class="logo-img">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.php">Services</a>
+            <a href="projects.php">Projects</a>
+            <a href="contact.php">Contact</a>
+        </nav>
+    </div>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.php">Services</a>
-        <a href="projects.php">Projects</a>
-        <a href="contact.php">Contact</a>
-    </nav>
+    <section class="page-banner">
+        <div class="page-banner-inner">
+            <h1><?php echo htmlspecialchars($page_title); ?></h1>
+            <p><?php echo htmlspecialchars($page_intro); ?></p>
+        </div>
+    </section>
 
     <div class="container">
         <img src="services.jpg" alt="Consulting services" class="page-img">

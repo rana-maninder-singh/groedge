@@ -88,23 +88,25 @@ $addr = $cfg->address ?? (object)['company' => '', 'line1' => '', 'line2' => '',
     <meta name="description" content="Schedule a complimentary 60-minute operational assessment with GroEdge. Identify your top constraints in cost, quality, capacity, or delivery—with clear next steps.">
 </head>
 <body>
-    <header>
-        <div class="logo logo-dark">
-            <a href="index.html"><img src="logo.png" alt="GroEdge" class="logo-img"></a>
-            <h1>GROEDGE</h1>
-            <p class="tagline">OPERATIONAL EXCELLENCE CONSULTANTS</p>
-        </div>
-        <h1>Tell us where operations are stuck</h1>
-        <p>Share your constraint. We will respond within one business day with a proposed assessment agenda—focused on outcomes, not a sales pitch.</p>
-    </header>
+    <div class="site-top">
+        <a href="index.html" class="brand">
+            <img src="logo.png" alt="GroEdge" class="logo-img">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.php">Services</a>
+            <a href="projects.php">Projects</a>
+            <a href="contact.php">Contact</a>
+        </nav>
+    </div>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.php">Services</a>
-        <a href="projects.php">Projects</a>
-        <a href="contact.php">Contact</a>
-    </nav>
+    <section class="page-banner">
+        <div class="page-banner-inner">
+            <h1>Tell us where operations are stuck</h1>
+            <p>Share your constraint. We will respond within one business day with a proposed assessment agenda—focused on outcomes, not a sales pitch.</p>
+        </div>
+    </section>
 
     <div class="container">
         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
