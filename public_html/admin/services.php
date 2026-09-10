@@ -111,11 +111,15 @@ while (count($approach_steps) < 4) { $approach_steps[] = ['number' => count($app
         <h1>Services page</h1>
         <div class="admin-nav">
             <a href="dashboard.php">Submissions</a>
-            <a href="settings.php">Site settings</a>
-            <a href="projects.php">Projects</a>
+            <a href="settings.php">Settings</a>
             <a href="services.php">Services</a>
+            <a href="projects.php">Projects</a>
+            <a href="testimonials.php">Testimonials</a>
+            <a href="blog.php">Blog</a>
+            <a href="industries.php">Industries</a>
+            <a href="resources.php">Resources</a>
+            <a href="../index.php">View site</a>
             <a href="logout.php">Log out</a>
-            <a href="../services.php">View services page</a>
         </div>
     </div>
 

@@ -1,34 +1,18 @@
 <?php
 define('DATA_DIR', __DIR__ . '/data');
 require_once __DIR__ . '/includes/config.php';
+$cfg = get_config();
+$base_path = '';
 
 $data = get_projects_data();
 $key_achievements = $data['key_achievements'] ?? [];
 $projects = $data['projects'] ?? [];
+
+$page_title = 'Projects & Results | GroEdge';
+$page_description = 'Selected GroEdge engagements: lead-time cuts, Lean throughput gains, DC redesign, and operational diligence—with outcomes leadership can verify.';
+$current_page = 'projects';
+include __DIR__ . '/includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects &amp; Results | GroEdge Operational Excellence</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="logo.png">
-    <meta name="description" content="Selected GroEdge engagements: lead-time cuts, Lean throughput gains, DC redesign, and operational diligence—with outcomes leadership can verify.">
-</head>
-<body>
-    <div class="site-top">
-        <a href="index.html" class="brand">
-            <img src="logo.png" alt="GroEdge" class="logo-img">
-        </a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="services.php">Services</a>
-            <a href="projects.php">Projects</a>
-            <a href="contact.php">Contact</a>
-        </nav>
-    </div>
 
     <section class="page-banner">
         <div class="page-banner-inner">
@@ -96,13 +80,4 @@ $projects = $data['projects'] ?? [];
         </div>
     </div>
 
-    <footer>
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <p style="margin-bottom: 10px;">&copy; 2026 GroEdge Management Consulting. All Rights Reserved.</p>
-            <p style="font-size: 0.9rem; opacity: 0.8;">Proof over promises.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<?php include __DIR__ . '/includes/footer.php'; ?>

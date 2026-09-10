@@ -1,0 +1,52 @@
+{
+  "resources": [
+    {
+      "id": "res-1",
+      "title": "Operational Maturity Self-Assessment",
+      "type": "checklist",
+      "description": "A 50-point diagnostic assessment that evaluates your organisation's operational maturity across leadership, processes, people, technology, and metrics. Identify where you stand and get a prioritised roadmap for improvement.",
+      "download_url": "tools/maturity.php",
+      "icon": "📋"
+    },
+    {
+      "id": "res-2",
+      "title": "Manufacturing Cost Benchmark Tool",
+      "type": "calculator",
+      "description": "Input your plant's key metrics — OEE, scrap rate, labour productivity, energy consumption — and instantly see how you compare to industry benchmarks. Built from data across 60+ Indian manufacturing facilities.",
+      "download_url": "tools/benchmark.php",
+      "icon": "📊"
+    },
+    {
+      "id": "res-3",
+      "title": "Supply Chain Health Checklist",
+      "type": "checklist",
+      "description": "A comprehensive checklist covering supplier management, inventory health, demand planning accuracy, logistics performance, and resilience readiness. Score your supply chain across 40 critical dimensions.",
+      "download_url": "tools/supply-chain-health.php",
+      "icon": "✅"
+    },
+    {
+      "id": "res-4",
+      "title": "Lean Readiness Scorecard",
+      "type": "template",
+      "description": "A structured scorecard to assess your organisation's readiness for Lean transformation. Evaluates cultural factors, process maturity, management commitment, and infrastructure requirements before you invest in Lean.",
+      "download_url": "tools/lean-readiness.php",
+      "icon": "📈"
+    },
+    {
+      "id": "res-5",
+      "title": "QMS Audit Preparation Checker",
+      "type": "guide",
+      "description": "An interactive checklist for ISO 9001, IATF 16949, or other QMS audits. Check off items across documentation, process control, audits, corrective action, supplier quality, and customer focus.",
+      "download_url": "tools/qms-checker.php",
+      "icon": "📘"
+    },
+    {
+      "id": "res-6",
+      "title": "ESG Compliance Roadmap",
+      "type": "guide",
+      "description": "Assess your readiness across Environment, Social, and Governance dimensions. Get a compliance timeline and action plan for BRSR reporting for Indian manufacturers.",
+      "download_url": "tools/esg-roadmap.php",
+      "icon": "🌿"
+    }
+  ]
+}

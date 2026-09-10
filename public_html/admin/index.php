@@ -76,7 +76,7 @@ if (!empty($_SESSION['admin_logged_in'])) {
             echo '<p class="warn">First-time setup: choose a strong password (min 8 characters) now. Until you do, anyone who reaches this page can claim admin access.</p>';
         }
         ?>
-        <a href="../index.html" class="back">← Back to site</a>
+        <a href="../index.php" class="back">← Back to site</a>
     </div>
 </body>
 </html>

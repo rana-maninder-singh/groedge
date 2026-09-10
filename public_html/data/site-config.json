@@ -14,5 +14,14 @@
     },
     "form_to_email": "info@groedge.in",
     "form_bcc": "rajesh@groedge.in, sales@groedge.in",
-    "admin_password_hash": ""
+    "admin_password_hash": "",
+    "tagline": "Where strategy meets the shop floor",
+    "secondary_tagline": "Less waste. More flow. Stronger margins.",
+    "linkedin_url": "https://linkedin.com/company/groedge",
+    "twitter_url": "#",
+    "youtube_url": "#",
+    "whatsapp_number": "919870255501",
+    "calendly_url": "#",
+    "gst_number": "#",
+    "established_year": "2018"
 }

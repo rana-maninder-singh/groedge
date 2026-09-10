@@ -135,11 +135,15 @@ if (isset($_GET['msg'])) {
         <h1>Projects & Achievements</h1>
         <div class="admin-nav">
             <a href="dashboard.php">Submissions</a>
-            <a href="settings.php">Site settings</a>
+            <a href="settings.php">Settings</a>
             <a href="services.php">Services</a>
             <a href="projects.php">Projects</a>
+            <a href="testimonials.php">Testimonials</a>
+            <a href="blog.php">Blog</a>
+            <a href="industries.php">Industries</a>
+            <a href="resources.php">Resources</a>
+            <a href="../index.php">View site</a>
             <a href="logout.php">Log out</a>
-            <a href="../projects.php">View projects page</a>
         </div>
     </div>
 

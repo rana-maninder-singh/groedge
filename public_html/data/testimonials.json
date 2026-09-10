@@ -1,0 +1,64 @@
+{
+  "testimonials": [
+    {
+      "id": "t1",
+      "name": "Vikram Mehta",
+      "role": "VP Operations",
+      "company": "Tier-1 Automotive Supplier",
+      "industry": "Automotive",
+      "quote": "GroEdge transformed our shop floor in ways we didn't think possible. Our OEE went from 58% to 79% in eight months, and the team's hands-on approach with our supervisors was the real differentiator. Rajesh doesn't just present slides — he rolls up his sleeves and works the line with your people.",
+      "rating": 5,
+      "avatar": "https://placehold.co/100x100/1a365d/ffffff?text=VM"
+    },
+    {
+      "id": "t2",
+      "name": "Priya Sharma",
+      "role": "Plant Head",
+      "company": "Leading Pharma Manufacturer",
+      "industry": "Pharmaceuticals",
+      "quote": "We were struggling with batch failure rates that were eating into our margins. GroEdge's quality systems approach helped us identify root causes we had overlooked for years. Our reject rate dropped from 4.2% to under 1.1% within two quarters. Their understanding of pharma compliance requirements is exceptional.",
+      "rating": 5,
+      "avatar": "https://placehold.co/100x100/1a365d/ffffff?text=PS"
+    },
+    {
+      "id": "t3",
+      "name": "Arun Nair",
+      "role": "Chief Supply Chain Officer",
+      "company": "Regional 3PL & Warehousing Provider",
+      "industry": "Logistics",
+      "quote": "Our warehouse operations were a black box — we had no idea where the 23% capacity loss was coming from. GroEdge mapped every process flow and within six weeks gave us a clear picture. We recovered ₹4.2 crore in annualised savings without spending a single rupee on new infrastructure.",
+      "rating": 5,
+      "avatar": "https://placehold.co/100x100/1a365d/ffffff?text=AN"
+    },
+    {
+      "id": "t4",
+      "name": "Sunita Reddy",
+      "role": "Director – Manufacturing Excellence",
+      "company": "Integrated Textile conglomerate",
+      "industry": "Textiles",
+      "quote": "The textile industry is notorious for thin margins, and we were no exception. GroEdge helped us implement a real-time S&OP process that finally aligned our demand forecasting with production planning. Our inventory turns improved by 35% and we reduced lead times by almost two weeks.",
+      "rating": 5,
+      "avatar": "https://placehold.co/100x100/1a365d/ffffff?text=SR"
+    },
+    {
+      "id": "t5",
+      "name": "Mohit Bansal",
+      "role": "Plant Director",
+      "company": "Specialty Chemicals Manufacturer",
+      "industry": "Chemicals",
+      "quote": "Rajesh and his team brought a clarity to our operations that we had been missing. They helped us build a robust safety and quality management system that not only reduced incidents by 60% but also satisfied our upcoming ESG compliance requirements. This is a firm that understands Indian manufacturing realities.",
+      "rating": 5,
+      "avatar": "https://placehold.co/100x100/1a365d/ffffff?text=MB"
+    },
+    {
+      "id": "t6",
+      "name": "Deepak Joshi",
+      "role": "Managing Director",
+      "company": "Precision Engineering Firm",
+      "industry": "Engineering",
+      "quote": "We brought GroEdge in to fix our delivery performance, but they ended up transforming our entire culture. Our OTIF went from 71% to 94%, and more importantly, our people now think in terms of continuous improvement. The Supervisor Academy programme they designed for us has become the backbone of our digital transformation.",
+      "rating": 5,
+      "avatar": "https://placehold.co/100x100/1a365d/ffffff?text=DJ"
+    }
+  ]
+}

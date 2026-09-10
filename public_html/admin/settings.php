@@ -23,6 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'line2' => trim($_POST['addr_line2'] ?? ''),
         'country' => trim($_POST['addr_country'] ?? '')
     ];
+    $cfg->tagline = trim($_POST['tagline'] ?? '');
+    $cfg->secondary_tagline = trim($_POST['secondary_tagline'] ?? '');
+    $cfg->whatsapp_number = trim($_POST['whatsapp_number'] ?? '');
+    $cfg->linkedin_url = trim($_POST['linkedin_url'] ?? '');
+    $cfg->twitter_url = trim($_POST['twitter_url'] ?? '');
+    $cfg->youtube_url = trim($_POST['youtube_url'] ?? '');
+    $cfg->calendly_url = trim($_POST['calendly_url'] ?? '');
+    $cfg->gst_number = trim($_POST['gst_number'] ?? '');
+    $cfg->established_year = trim($_POST['established_year'] ?? '');
 
     if (isset($_POST['new_password']) && strlen($_POST['new_password']) >= 8) {
         $cfg->admin_password_hash = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
@@ -67,10 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>Site Settings</h1>
         <div class="admin-nav">
             <a href="dashboard.php">Submissions</a>
+            <a href="settings.php">Settings</a>
             <a href="services.php">Services</a>
             <a href="projects.php">Projects</a>
+            <a href="testimonials.php">Testimonials</a>
+            <a href="blog.php">Blog</a>
+            <a href="industries.php">Industries</a>
+            <a href="resources.php">Resources</a>
+            <a href="../index.php">View site</a>
             <a href="logout.php">Log out</a>
-            <a href="../contact.php">View contact page</a>
         </div>
     </div>
 
@@ -137,6 +151,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label>Country</label>
                 <input type="text" name="addr_country" value="<?php echo htmlspecialchars($addr->country ?? ''); ?>">
+            </div>
+        </section>
+
+        <section>
+            <h2>Branding &amp; Taglines</h2>
+            <div class="form-group">
+                <label>Primary tagline</label>
+                <input type="text" name="tagline" value="<?php echo htmlspecialchars($cfg->tagline ?? ''); ?>" placeholder="Where strategy meets the shop floor">
+            </div>
+            <div class="form-group">
+                <label>Secondary tagline (footer)</label>
+                <input type="text" name="secondary_tagline" value="<?php echo htmlspecialchars($cfg->secondary_tagline ?? ''); ?>" placeholder="Diagnosis. Implementation. Capability that stays.">
+            </div>
+            <div class="form-group">
+                <label>Established year</label>
+                <input type="text" name="established_year" value="<?php echo htmlspecialchars($cfg->established_year ?? ''); ?>" placeholder="2018">
+            </div>
+            <div class="form-group">
+                <label>GST Number</label>
+                <input type="text" name="gst_number" value="<?php echo htmlspecialchars($cfg->gst_number ?? ''); ?>">
+            </div>
+        </section>
+
+        <section>
+            <h2>WhatsApp &amp; Scheduling</h2>
+            <div class="form-group">
+                <label>WhatsApp number (with country code, no + or spaces)</label>
+                <input type="text" name="whatsapp_number" value="<?php echo htmlspecialchars($cfg->whatsapp_number ?? ''); ?>" placeholder="919870255501">
+                <p class="hint">Used for the floating WhatsApp button. Format: countrycode + number (e.g. 919870255501)</p>
+            </div>
+            <div class="form-group">
+                <label>Calendly URL (for scheduling embed)</label>
+                <input type="url" name="calendly_url" value="<?php echo htmlspecialchars($cfg->calendly_url ?? ''); ?>" placeholder="https://calendly.com/your-link">
+                <p class="hint">Leave # to show a placeholder. Paste your Calendly scheduling link to enable the embed.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Social Media Links</h2>
+            <div class="form-group">
+                <label>LinkedIn company URL</label>
+                <input type="url" name="linkedin_url" value="<?php echo htmlspecialchars($cfg->linkedin_url ?? ''); ?>" placeholder="https://linkedin.com/company/groedge">
+            </div>
+            <div class="form-group">
+                <label>Twitter / X URL</label>
+                <input type="url" name="twitter_url" value="<?php echo htmlspecialchars($cfg->twitter_url ?? ''); ?>">
+            </div>
+            <div class="form-group">
+                <label>YouTube channel URL</label>
+                <input type="url" name="youtube_url" value="<?php echo htmlspecialchars($cfg->youtube_url ?? ''); ?>">
             </div>
         </section>
 

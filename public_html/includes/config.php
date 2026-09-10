@@ -136,3 +136,75 @@ function save_services_data($data) {
     $path = DATA_DIR . '/services.json';
     return file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX) !== false;
 }
+
+/**
+ * Testimonials data (testimonials.json).
+ */
+function get_testimonials_data() {
+    $path = DATA_DIR . '/testimonials.json';
+    if (!is_file($path)) { return ['testimonials' => []]; }
+    $json = file_get_contents($path);
+    $data = json_decode($json, true);
+    if (!is_array($data)) { return ['testimonials' => []]; }
+    $data['testimonials'] = isset($data['testimonials']) && is_array($data['testimonials']) ? $data['testimonials'] : [];
+    return $data;
+}
+
+function save_testimonials_data($data) {
+    $path = DATA_DIR . '/testimonials.json';
+    return file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX) !== false;
+}
+
+/**
+ * Blog data (blog.json).
+ */
+function get_blog_data() {
+    $path = DATA_DIR . '/blog.json';
+    if (!is_file($path)) { return ['posts' => []]; }
+    $json = file_get_contents($path);
+    $data = json_decode($json, true);
+    if (!is_array($data)) { return ['posts' => []]; }
+    $data['posts'] = isset($data['posts']) && is_array($data['posts']) ? $data['posts'] : [];
+    return $data;
+}
+
+function save_blog_data($data) {
+    $path = DATA_DIR . '/blog.json';
+    return file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX) !== false;
+}
+
+/**
+ * Industries data (industries.json).
+ */
+function get_industries_data() {
+    $path = DATA_DIR . '/industries.json';
+    if (!is_file($path)) { return ['industries' => []]; }
+    $json = file_get_contents($path);
+    $data = json_decode($json, true);
+    if (!is_array($data)) { return ['industries' => []]; }
+    $data['industries'] = isset($data['industries']) && is_array($data['industries']) ? $data['industries'] : [];
+    return $data;
+}
+
+function save_industries_data($data) {
+    $path = DATA_DIR . '/industries.json';
+    return file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX) !== false;
+}
+
+/**
+ * Resources data (resources.json).
+ */
+function get_resources_data() {
+    $path = DATA_DIR . '/resources.json';
+    if (!is_file($path)) { return ['resources' => []]; }
+    $json = file_get_contents($path);
+    $data = json_decode($json, true);
+    if (!is_array($data)) { return ['resources' => []]; }
+    $data['resources'] = isset($data['resources']) && is_array($data['resources']) ? $data['resources'] : [];
+    return $data;
+}
+
+function save_resources_data($data) {
+    $path = DATA_DIR . '/resources.json';
+    return file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX) !== false;
+}

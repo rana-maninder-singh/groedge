@@ -92,6 +92,71 @@
                 "Problem-solving and continuous improvement cadence",
                 "Certification readiness support where required"
             ]
+        },
+        {
+            "id": "ai-ready-operations",
+            "title": "AI-ready operations",
+            "short_desc": "Prepare your data, processes, and people for manufacturing AI.",
+            "description": "Most manufacturing AI projects fail because the underlying processes are not standardised, data is dirty, and operators are not engaged. We prepare your operation for AI success—clean data pipelines, standard work, and the digital infrastructure that makes predictive analytics, digital twins, and automation actually work.",
+            "bullets": [
+                "Data readiness assessment and cleanup",
+                "Process standardisation for AI input quality",
+                "IoT sensor strategy and deployment roadmap",
+                "Digital twin readiness and use-case prioritisation",
+                "Operator training for AI-assisted decision-making"
+            ]
+        },
+        {
+            "id": "sustainable-operations",
+            "title": "Sustainable operations & ESG",
+            "short_desc": "Cut environmental cost and meet BRSR/ESG mandates through operational improvement.",
+            "description": "Sustainability is no longer optional—BRSR in India, EU CBAM, and customer audits demand measurable environmental performance. We help manufacturers reduce energy, water, and waste through the same Lean principles that improve cost and quality. The result: lower utility bills, audit-ready reporting, and a stronger ESG profile.",
+            "bullets": [
+                "Energy and waste mapping across production lines",
+                "Water usage optimisation and recycling pathways",
+                "BRSR / ESG reporting readiness and data collection",
+                "Carbon footprint baselining and reduction roadmaps",
+                "Circular economy and material recovery strategies"
+            ]
+        },
+        {
+            "id": "supply-chain-resilience",
+            "title": "Supply chain resilience",
+            "short_desc": "Build a supply network that survives disruption—not one that depends on luck.",
+            "description": "Post-COVID, post-Red Sea, post-everything: supply chain disruption is permanent. We stress-test your network, diversify sourcing, and build contingency plans so the next shock does not become a crisis. Nearshoring, China+1 strategy, and inventory buffers designed with data, not guesswork.",
+            "bullets": [
+                "Supply chain stress testing and scenario modelling",
+                "Nearshoring and China+1 sourcing strategy",
+                "Critical SKU risk assessment and contingency planning",
+                "Safety stock optimisation under demand volatility",
+                "Supplier diversification and collaboration framework"
+            ]
+        },
+        {
+            "id": "operational-due-diligence",
+            "title": "Operational due diligence",
+            "short_desc": "Uncover the real operational story before you invest—or integrate.",
+            "description": "Private equity firms and acquirers need more than financial diligence. We assess operational capability, identify synergy levers, quantify integration risks, and support post-close consolidation—so value creation plans are grounded in operational reality, not spreadsheet assumptions.",
+            "bullets": [
+                "Pre-deal operational capability assessment",
+                "Synergy identification and validation",
+                "Post-close integration and process alignment",
+                "Site consolidation planning and execution",
+                "Management reporting and KPI standardisation"
+            ]
+        },
+        {
+            "id": "workforce-capability",
+            "title": "Workforce capability building",
+            "short_desc": "Close the skills gap with structured upskilling for operators, supervisors, and engineers.",
+            "description": "India's manufacturing sector faces a widening skills gap. New technology is only as good as the people who run it. We design and deliver structured capability-building programmes—from operator digital literacy to supervisor leadership to engineer problem-solving—that turn training investment into measurable performance gains.",
+            "bullets": [
+                "Operator 4.0 digital skills training programme",
+                "Supervisor Academy: leadership and daily management",
+                "Lean practitioner certification and coaching",
+                "Knowledge management systems for tribal expertise",
+                "Competency matrix design and skills gap analysis"
+            ]
         }
     ],
     "cta_heading": "Not sure where to start?",

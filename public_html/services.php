@@ -1,9 +1,12 @@
 <?php
 define('DATA_DIR', __DIR__ . '/data');
 require_once __DIR__ . '/includes/config.php';
+$cfg = get_config();
+$base_path = '';
 
 $data = get_services_data();
-$page_title = $data['page_title'] ?? 'Our Services';
+$page_title = ($data['page_title'] ?? 'Our Services') . ' | GroEdge';
+$page_description = 'GroEdge services: process &amp; flow, performance systems, operating model, technology fit, supply chain, and quality systems—implemented on site.';
 $page_intro = $data['page_intro'] ?? '';
 $intro_paragraph = $data['intro_paragraph'] ?? '';
 $pillars = $data['pillars'] ?? [];
@@ -11,34 +14,13 @@ $approach_steps = $data['approach_steps'] ?? [];
 $services = $data['services'] ?? [];
 $cta_heading = $data['cta_heading'] ?? '';
 $cta_paragraph = $data['cta_paragraph'] ?? '';
+$current_page = 'services';
+include __DIR__ . '/includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulting Services | GroEdge Operational Excellence</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="logo.png">
-    <meta name="description" content="GroEdge services: process &amp; flow, performance systems, operating model, technology fit, supply chain, and quality systems—implemented on site.">
-</head>
-<body>
-    <div class="site-top">
-        <a href="index.html" class="brand">
-            <img src="logo.png" alt="GroEdge" class="logo-img">
-        </a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="services.php">Services</a>
-            <a href="projects.php">Projects</a>
-            <a href="contact.php">Contact</a>
-        </nav>
-    </div>
 
     <section class="page-banner">
         <div class="page-banner-inner">
-            <h1><?php echo htmlspecialchars($page_title); ?></h1>
+            <h1><?php echo htmlspecialchars($data['page_title'] ?? 'Our Services'); ?></h1>
             <p><?php echo htmlspecialchars($page_intro); ?></p>
         </div>
     </section>
@@ -47,7 +29,6 @@ $cta_paragraph = $data['cta_paragraph'] ?? '';
         <img src="services.jpg" alt="Consulting services" class="page-img">
 
         <div class="section-content services-page">
-            <!-- Jump navigation: quick access to each service -->
             <?php if (count($services) > 0): ?>
             <nav class="services-jump" aria-label="Services quick links">
                 <h2 class="services-jump-title">Jump to a service</h2>
@@ -79,7 +60,6 @@ $cta_paragraph = $data['cta_paragraph'] ?? '';
             </section>
             <?php endif; ?>
 
-            <!-- Service cards: clear, scannable -->
             <section class="services-list">
                 <h2>Service lines</h2>
                 <?php if (empty($services)): ?>
@@ -132,13 +112,4 @@ $cta_paragraph = $data['cta_paragraph'] ?? '';
         </div>
     </div>
 
-    <footer>
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <p style="margin-bottom: 10px;">&copy; 2026 GroEdge Management Consulting. All Rights Reserved.</p>
-            <p style="font-size: 0.9rem; opacity: 0.8;">Diagnose. Deliver. Embed.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<?php include __DIR__ . '/includes/footer.php'; ?>

@@ -1,0 +1,160 @@
+{
+  "industries": [
+    {
+      "id": "ind-pharma",
+      "name": "Pharmaceuticals",
+      "slug": "pharmaceuticals",
+      "icon": "💊",
+      "tagline": "Operational excellence that meets the highest regulatory standards",
+      "description": "India's pharmaceutical manufacturing sector operates under some of the world's most demanding regulatory frameworks. From FDA and WHO-GMP compliance to increasing ESG requirements, pharma manufacturers need operational systems that deliver both quality and efficiency. We help pharma plants reduce batch failures, improve yield, and build quality systems that satisfy the most stringent auditors.",
+      "pain_points": [
+        "High batch failure and rejection rates eroding margins",
+        "Regulatory compliance burden consuming disproportionate management time",
+        "Inconsistent yield across shifts and operators despite identical SOPs",
+        "Audit readiness anxiety — maintaining compliance documentation in real-time, not before inspections"
+      ],
+      "solutions": [
+        "Statistical Process Control implementation for critical quality attributes",
+        "Quality Management System redesign aligned to ICH Q10 guidelines",
+        "Operator qualification and competency management frameworks",
+        "Real-time compliance dashboards for continuous audit readiness"
+      ],
+      "stats": [
+        { "label": "Average batch failure reduction", "value": "62%" },
+        { "label": "Typical COPQ in pharma", "value": "18-22% of revenue" },
+        { "label": "Our pharma clients' yield improvement", "value": "8-15%" }
+      ],
+      "image": "https://placehold.co/800x400/0d4f6b/ffffff?text=Pharmaceuticals"
+    },
+    {
+      "id": "ind-manufacturing",
+      "name": "Manufacturing",
+      "slug": "manufacturing",
+      "icon": "🏭",
+      "tagline": "From reactive firefighting to proactive operational control",
+      "description": "Indian discrete and process manufacturing faces intense global competition, rising input costs, and increasing customer expectations for quality and delivery. We help manufacturers build the operational discipline — standardised work, visual management, data-driven decision making — that transforms shop floor performance without massive capital investment.",
+      "pain_points": [
+        "Low OEE despite significant investments in equipment and technology",
+        "Chronic delivery performance issues causing customer escalations",
+        "Excessive inventory levels coexisting with frequent stockouts",
+        "Digital transformation initiatives that stall after pilot phase"
+      ],
+      "solutions": [
+        "OEE improvement programmes targeting 15-25 percentage point gains",
+        "S&OP process design and implementation for demand-supply alignment",
+        "Shop floor digitalisation with real-time loss tracking and analytics",
+        "Supervisor Academy programmes for frontline leadership capability"
+      ],
+      "stats": [
+        { "label": "Average OEE improvement", "value": "18-25 points" },
+        { "label": "Delivery performance uplift", "value": "20-35%" },
+        { "label": "Inventory reduction achieved", "value": "25-40%" }
+      ],
+      "image": "https://placehold.co/800x400/1a365d/ffffff?text=Manufacturing"
+    },
+    {
+      "id": "ind-logistics",
+      "name": "Logistics",
+      "slug": "logistics",
+      "icon": "🚛",
+      "tagline": "Efficient flows from warehouse to last mile",
+      "description": "India's logistics sector is growing rapidly, but operational inefficiencies consume much of the margin gains. Warehouse space utilization, order accuracy, vehicle turnaround times, and workforce productivity are persistent challenges. We help logistics operators build process discipline and deploy digital tools that drive measurable improvements in throughput and cost per unit handled.",
+      "pain_points": [
+        "Warehouse space utilization below 60% despite perceived capacity constraints",
+        "Order picking errors and fulfillment delays impacting customer satisfaction",
+        "High workforce attrition and inconsistent productivity across shifts",
+        "Poor visibility into real-time operations across multiple facilities"
+      ],
+      "solutions": [
+        "Warehouse layout optimization and flow redesign for maximum throughput",
+        "Lean process implementation for order fulfillment and returns processing",
+        "Workforce management systems with performance tracking and incentive alignment",
+        "Control tower implementation for end-to-end supply chain visibility"
+      ],
+      "stats": [
+        { "label": "Warehouse utilization improvement", "value": "30-45%" },
+        { "label": "Order accuracy improvement", "value": "99.2%+ achieved" },
+        { "label": "Cost per unit handled reduction", "value": "15-25%" }
+      ],
+      "image": "https://placehold.co/800x400/2d5a87/ffffff?text=Logistics"
+    },
+    {
+      "id": "ind-chemicals",
+      "name": "Chemicals",
+      "slug": "chemicals",
+      "icon": "⚗️",
+      "tagline": "Safety, sustainability, and operational excellence in balance",
+      "description": "Chemical manufacturing in India faces unique challenges: stringent safety requirements, increasing environmental regulations, complex batch processes, and raw material volatility. We help chemical manufacturers build robust safety and quality management systems, optimise batch processes, and develop ESG compliance frameworks that turn regulatory pressure into competitive advantage.",
+      "pain_points": [
+        "Safety incidents and near-misses indicating systemic risk management gaps",
+        "High energy consumption and emissions relative to global benchmarks",
+        "Batch-to-batch variability despite fixed formulations and recipes",
+        "Complex regulatory compliance across multiple environmental and safety frameworks"
+      ],
+      "solutions": [
+        "Process Safety Management system implementation aligned to OSHA/NFPA standards",
+        "Energy optimisation and waste heat recovery programmes",
+        "Statistical batch process control and recipe optimisation",
+        "Integrated ESG compliance framework covering emissions, effluents, and reporting"
+      ],
+      "stats": [
+        { "label": "Safety incident reduction", "value": "55-70%" },
+        { "label": "Energy cost reduction", "value": "12-20%" },
+        { "label": "Batch consistency improvement", "value": "40-60%" }
+      ],
+      "image": "https://placehold.co/800x400/1b4332/ffffff?text=Chemicals"
+    },
+    {
+      "id": "ind-textiles",
+      "name": "Textiles",
+      "slug": "textiles",
+      "icon": "🧵",
+      "tagline": "Precision and speed in a margin-tight industry",
+      "description": "India's textile industry operates on razor-thin margins where even small improvements in efficiency translate to significant profitability gains. From spinning and weaving to dyeing and finishing, every process step offers opportunities for waste reduction, quality improvement, and lead time compression. We help textile manufacturers build the operational systems needed to compete globally.",
+      "pain_points": [
+        "High fabric defect rates leading to rework and customer rejections",
+        "Poor demand-supply alignment causing excess inventory of wrong SKUs",
+        "Inconsistent dyeing and finishing quality across production lots",
+        "Long lead times that lose business to faster competitors"
+      ],
+      "solutions": [
+        "Defect prevention and detection systems across spinning, weaving, and finishing",
+        "S&OP implementation for demand-driven production planning",
+        "Colour management and process standardisation for dyeing consistency",
+        "Lead time compression through value stream mapping and waste elimination"
+      ],
+      "stats": [
+        { "label": "Defect rate reduction", "value": "45-65%" },
+        { "label": "Lead time compression", "value": "20-35%" },
+        { "label": "Inventory turnover improvement", "value": "30-50%" }
+      ],
+      "image": "https://placehold.co/800x400/5c4033/ffffff?text=Textiles"
+    },
+    {
+      "id": "ind-engineering",
+      "name": "Engineering",
+      "slug": "engineering",
+      "icon": "⚙️",
+      "tagline": "Precision manufacturing demands operational perfection",
+      "description": "Engineering and precision manufacturing firms in India serve demanding customers in automotive, aerospace, and capital goods sectors. Tight tolerances, zero-defect expectations, and competitive pricing require world-class operational systems. We help engineering firms build the process discipline, quality frameworks, and digital capabilities needed to win and retain premium customers.",
+      "pain_points": [
+        "Scrap and rework costs consuming 5-8% of revenue in precision operations",
+        "Capacity planning challenges leading to either idle machines or missed deliveries",
+        "Skilled workforce shortage making consistent quality delivery difficult",
+        "Customer audit requirements increasing in frequency and complexity"
+      ],
+      "solutions": [
+        "Statistical Process Control and capability studies for critical dimensions",
+        "Advanced planning and scheduling systems for optimal machine utilisation",
+        "Operator skill matrices and structured training and certification programmes",
+        "Integrated management system implementation covering ISO 9001, 14001, and 45001"
+      ],
+      "stats": [
+        { "label": "Scrap and rework reduction", "value": "50-70%" },
+        { "label": "On-time delivery improvement", "value": "25-40%" },
+        { "label": "First pass yield improvement", "value": "15-30 points" }
+      ],
+      "image": "https://placehold.co/800x400/3d405b/ffffff?text=Engineering"
+    }
+  ]
+}

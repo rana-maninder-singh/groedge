@@ -24,18 +24,22 @@ $submissions = get_submissions();
         .submission-detail h4 { color: #1a365d; margin-bottom: 10px; }
         .submission-detail p { margin: 8px 0; }
         .empty { color: #718096; padding: 40px; text-align: center; }
-        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; background: #e2e8f0; color: #4a5568; }
     </style>
 </head>
 <body>
     <div class="admin-header">
         <h1>Contact Form Submissions</h1>
         <div class="admin-nav">
-            <a href="settings.php">Site settings</a>
+            <a href="dashboard.php">Submissions</a>
+            <a href="settings.php">Settings</a>
             <a href="services.php">Services</a>
             <a href="projects.php">Projects</a>
+            <a href="testimonials.php">Testimonials</a>
+            <a href="blog.php">Blog</a>
+            <a href="industries.php">Industries</a>
+            <a href="resources.php">Resources</a>
+            <a href="../index.php">View site</a>
             <a href="logout.php">Log out</a>
-            <a href="../index.html">View site</a>
         </div>
     </div>
 
@@ -70,11 +74,7 @@ $submissions = get_submissions();
                                 <h4><?php echo htmlspecialchars($s['name'] ?? ''); ?> — <?php echo htmlspecialchars($s['submitted_at'] ?? ''); ?></h4>
                                 <p><strong>Phone:</strong> <?php echo htmlspecialchars($s['phone'] ?? '-'); ?></p>
                                 <p><strong>Company size:</strong> <?php echo htmlspecialchars($s['employees'] ?? '-'); ?></p>
-                                <p><strong>Primary interest:</strong> <?php echo htmlspecialchars($s['service'] ?? '-'); ?></p>
                                 <p><strong>Challenge:</strong><br><?php echo nl2br(htmlspecialchars($s['challenge'] ?? '-')); ?></p>
-                                <?php if (!empty($s['message'])): ?>
-                                <p><strong>Additional:</strong><br><?php echo nl2br(htmlspecialchars($s['message'])); ?></p>
-                                <?php endif; ?>
                             </div>
                         </details>
                     </td>
