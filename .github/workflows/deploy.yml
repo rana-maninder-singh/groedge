@@ -1,17 +1,4 @@
-# Deploy GroEdge (public_html) to Plesk httpdocs on push to main.
-#
-# Setup (once):
-#   1. Create an FTP account in Plesk (Websites & Domains → FTP Access).
-#   2. Add GitHub repo secrets (Settings → Secrets and variables → Actions):
-#        FTP_HOST         - your Plesk server hostname (e.g. server.example.com)
-#        FTP_USER         - FTP username
-#        FTP_PASSWORD     - FTP password
-#        FTP_REMOTE_PATH  - /httpdocs   (Plesk web root; include trailing slash if required by host)
-#   3. Push to main (or run "Deploy to server" manually from the Actions tab).
-#
-# Prefer Plesk-native Git instead? Use scripts/plesk-git-deploy.sh as Additional deploy actions.
-
-name: Deploy to server
+name: Deploy to cPanel
 
 on:
   push:
@@ -22,32 +9,36 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Verify FTP secrets
+      - name: Validate PHP syntax
         run: |
-          missing=0
-          for name in FTP_HOST FTP_USER FTP_PASSWORD FTP_REMOTE_PATH; do
-            # secrets are not expanded into env here; check via GitHub expression below
-            :
+          sudo apt-get update && sudo apt-get install -y php-cli
+          errors=0
+          for f in $(find public_html -name "*.php"); do
+            result=$(php -l "$f" 2>&1)
+            if echo "$result" | grep -q "Parse error\|Fatal error"; then
+              echo "ERROR: $f"
+              echo "$result"
+              errors=$((errors + 1))
+            fi
           done
-          if [ -z "${{ secrets.FTP_HOST }}" ] || [ -z "${{ secrets.FTP_USER }}" ] || [ -z "${{ secrets.FTP_PASSWORD }}" ] || [ -z "${{ secrets.FTP_REMOTE_PATH }}" ]; then
-            echo "::error::Missing GitHub Actions secrets. Add FTP_HOST, FTP_USER, FTP_PASSWORD, FTP_REMOTE_PATH (use /httpdocs on Plesk)."
+          if [ $errors -gt 0 ]; then
+            echo "$errors file(s) have syntax errors"
             exit 1
           fi
+          echo "All PHP files pass syntax check"
 
-      - name: Deploy via FTP to Plesk
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.0.0
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_REMOTE_PATH }}
+          server: ${{ secrets.CPANEL_FTP_HOST }}
+          username: ${{ secrets.CPANEL_FTP_USER }}
+          password: ${{ secrets.CPANEL_FTP_PASS }}
+          server-dir: /public_html/
           local-dir: ./public_html/
           exclude: |
-            **/.git*
-            **/.DS_Store
-            **/data/submissions.json
-            **/admin.zip
-          dangerous-clean-slate: false
+            *.zip
+            *.log
+            .git*
