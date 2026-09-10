@@ -1,0 +1,24 @@
+name: FTP Debug - List Directory Structure
+
+on:
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect FTP directory structure
+        env:
+          FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
+          FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
+          FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          echo "=== FTP ROOT (/) ==="
+          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-protect-data no; ls -la /; quit" 2>&1 || \
+          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "set ftp:ssl-force no; ls -la /; quit" 2>&1
+          echo "=== LOOKING FOR WEB ROOT ==="
+          for d in public_html httpdocs www webroot; do
+            echo "--- /$d ---"
+            lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-protect-data no; ls /$d; quit" 2>&1 | head -20
+          done
