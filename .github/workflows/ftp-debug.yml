@@ -13,12 +13,15 @@ jobs:
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          which curl
           echo "=== FTP ROOT (/) ==="
-          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-protect-data no; ls -la /; quit" 2>&1 || \
-          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "set ftp:ssl-force no; ls -la /; quit" 2>&1
-          echo "=== LOOKING FOR WEB ROOT ==="
-          for d in public_html httpdocs www webroot; do
-            echo "--- /$d ---"
-            lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "set ssl:verify-certificate no; set ftp:ssl-protect-data no; ls /$d; quit" 2>&1 | head -20
-          done
+          curl -s --connect-timeout 10 --max-time 30 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" || echo "FAILED ROOT"
+          echo ""
+          echo "=== /public_html ==="
+          curl -s --connect-timeout 10 --max-time 30 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/public_html/" || echo "FAILED public_html"
+          echo ""
+          echo "=== /httpdocs ==="
+          curl -s --connect-timeout 10 --max-time 30 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/" || echo "FAILED httpdocs"
+          echo ""
+          echo "=== /www ==="
+          curl -s --connect-timeout 10 --max-time 30 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/www/" || echo "FAILED www"
