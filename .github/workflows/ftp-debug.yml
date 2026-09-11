@@ -7,29 +7,30 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Look for personal-site remnants
+      - name: Inspect personal site entry points
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
           set +e
-          echo "=== httpdocs (current personal root) ==="
-          curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/" 2>&1 | head -60
+          echo "=== httpdocs/website/ ==="
+          curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/website/" 2>&1 | head -40
 
           echo ""
-          echo "=== top-level dirs ==="
-          curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | awk '/^d/ {print}' | head -40
+          echo "=== index.html.old ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/index.html.old" | head -40
 
           echo ""
-          echo "=== search likely backup / old folders ==="
-          for d in backup backups old private httpdocs.old git www public_html; do
-            echo "-- $d --"
-            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/$d/" 2>&1 | head -15
-          done
+          echo "=== website/index.html head ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/w.html "ftp://$FTP_HOST/httpdocs/website/index.html"
+          echo "size=$(wc -c < /tmp/w.html)"
+          head -40 /tmp/w.html
 
           echo ""
-          echo "=== httpdocs index.html first lines ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/i.html "ftp://$FTP_HOST/httpdocs/index.html"
-          head -20 /tmp/i.html
-          echo "size=$(wc -c < /tmp/i.html)"
+          echo "=== package.json ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/package.json"
+
+          echo ""
+          echo "=== README.md head ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/README.md" | head -40
