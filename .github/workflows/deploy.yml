@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Validate PHP syntax
         run: |
@@ -31,7 +31,7 @@ jobs:
           echo "All PHP files pass syntax check"
 
       - name: Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@v4.1.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.CPANEL_FTP_HOST }}
           username: ${{ secrets.CPANEL_FTP_USER }}
