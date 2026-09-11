@@ -1,4 +1,4 @@
-name: FTP Debug - Confirm Server Identity
+name: FTP Debug - Marker File Test
 
 on:
   workflow_dispatch:
@@ -7,33 +7,33 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Compare cluster and files
+      - name: Upload marker file and test live fetch
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
-          echo "=== FTP HOST RESOLUTION ==="
-          echo "$FTP_HOST"
-          getent hosts "$FTP_HOST" || nslookup "$FTP_HOST" 2>&1 | tail -5
-
+          MARKER="grdg-probe-$(date +%s).txt"
+          echo "PleskProbeOK-$MARKER" > /tmp/$MARKER
+          echo "=== UPLOAD $MARKER to FTP root ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$MARKER" 2>&1
+          echo "upload exit: $?"
           echo ""
-          echo "=== LIVE groedge.in RESOLUTION ==="
-          getent hosts groedge.in || nslookup groedge.in 2>&1 | tail -5
-
+          echo "=== VERIFY LISTING shows it ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | grep "$MARKER"
           echo ""
-          echo "=== DOWNLOAD index.php FROM FTP ROOT ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/index.php "ftp://$FTP_HOST/index.php" 2>&1
-          echo "Size: $(wc -c < /tmp/index.php) bytes"
-          echo "First line: $(head -1 /tmp/index.php)"
-          if grep -q "mega-menu\|industries" /tmp/index.php; then echo "CONTAINS NEW NAV"; else echo "NO NEW NAV"; fi
-
+          echo "=== TRY FETCH FROM LIVE SITE ==="
+          HTTP=$(curl -sk --connect-timeout 10 --max-time 20 -o /dev/null -w "%{http_code}" "https://groedge.in/$MARKER" 2>&1)
+          echo "https://groedge.in/$MARKER -> HTTP $HTTP"
+          if [ "$HTTP" = "200" ]; then
+            echo "SUCCESS: FTP root == LIVE web root"
+            curl -sk --connect-timeout 10 --max-time 20 "https://groedge.in/$MARKER" 2>&1
+          else
+            echo "MISMATCH: FTP root is NOT the live web root"
+            echo "Also probing DNS IPs:"
+            getent hosts groedge.in | awk '{print $1}'
+          fi
           echo ""
-          echo "=== DOWNLOAD resources.php FROM FTP ROOT ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/resources.php "ftp://$FTP_HOST/resources.php" 2>&1
-          echo "Size: $(wc -c < /tmp/resources.php) bytes"
-          if grep -q "Resource\|Download\|tools/\|Try tool" /tmp/resources.php; then echo "CONTAINS RESOURCE TOOLS"; else echo "NO RESOURCE CONTENT"; fi
-
-          echo ""
-          echo "=== LIST PARENT STRUCTURE (look for phtml/index pattern) ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | grep -E "index|php|html|tools|includes" | head -20
+          echo "=== CLEANUP ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -X 'DELE' "ftp://$FTP_HOST/$MARKER" 2>&1 || curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "ftp://$FTP_HOST/" 2>&1
+          echo "cleanup attempted"
