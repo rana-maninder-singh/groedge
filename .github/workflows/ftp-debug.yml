@@ -7,43 +7,29 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Confirm domain document roots
+      - name: Look for personal-site remnants
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
           set +e
-          TS=$(date +%s)
-          MARKER="grdg-probe-${TS}.txt"
-          echo "PleskProbeOK-$MARKER" > /tmp/$MARKER
+          echo "=== httpdocs (current personal root) ==="
+          curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/" 2>&1 | head -60
 
-          # Likely addon domain folder names (may be secret-masked in logs)
-          CANDIDATES=(
-            "httpdocs"
-            "public_html"
-            "groedge.in"
-            "www.groedge.in"
-            "ranamanindersingh.com"
-            "www.ranamanindersingh.com"
-            "groedge"
-          )
+          echo ""
+          echo "=== top-level dirs ==="
+          curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | awk '/^d/ {print}' | head -40
 
-          for DIR in "${CANDIDATES[@]}"; do
-            echo ""
-            echo "=== TRY $DIR ==="
-            curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$DIR/$MARKER"
-            echo "upload_exit=$?"
-
-            for HOST in "https://groedge.in" "https://ranamanindersingh.com"; do
-              HTTP=$(curl -sk --connect-timeout 10 --max-time 15 -o /tmp/body -w "%{http_code}" "$HOST/$MARKER")
-              HIT="no"
-              if [ "$HTTP" = "200" ] && grep -q "PleskProbeOK" /tmp/body 2>/dev/null; then HIT="YES"; fi
-              echo "$HOST <- /$DIR/ => HTTP $HTTP hit=$HIT"
-            done
-
-            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/s.css "ftp://$FTP_HOST/$DIR/style.css"
-            echo "/$DIR/style.css bytes=$(wc -c < /tmp/s.css 2>/dev/null || echo 0)"
-
-            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "ftp://$FTP_HOST/$DIR/" >/dev/null 2>&1 || true
+          echo ""
+          echo "=== search likely backup / old folders ==="
+          for d in backup backups old private httpdocs.old git www public_html; do
+            echo "-- $d --"
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/$d/" 2>&1 | head -15
           done
+
+          echo ""
+          echo "=== httpdocs index.html first lines ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/i.html "ftp://$FTP_HOST/httpdocs/index.html"
+          head -20 /tmp/i.html
+          echo "size=$(wc -c < /tmp/i.html)"
