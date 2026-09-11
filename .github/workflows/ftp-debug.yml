@@ -1,4 +1,4 @@
-name: FTP Debug - Download index.html
+name: FTP Debug - List Web Root Contents
 
 on:
   workflow_dispatch:
@@ -7,42 +7,17 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Download and inspect index.html from FTP root
+      - name: List FTP web root
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
-          echo "=== DOWNLOAD index.html from / ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/root-index.html "ftp://$FTP_HOST/index.html" 2>&1
-          echo "Size: $(wc -c < /tmp/root-index.html) bytes"
-          echo "Content:"
-          cat /tmp/root-index.html
-
+          echo "=== FTP ROOT (web root) FULL LISTING ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1
           echo ""
-          echo "=== DOWNLOAD index.html from /httpdocs/ ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/httpdocs-index.html "ftp://$FTP_HOST/httpdocs/index.html" 2>&1
-          echo "Size: $(wc -c < /tmp/httpdocs-index.html) bytes"
-          echo "Content:"
-          cat /tmp/httpdocs-index.html
-
-          echo ""
-          echo "=== CHECK services.php at FTP root ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/root-services.php "ftp://$FTP_HOST/services.php" 2>&1
-          echo "Size: $(wc -c < /tmp/root-services.php) bytes"
-          echo "Content (first 10 lines):"
-          head -10 /tmp/root-services.php
-
-          echo ""
-          echo "=== CHECK if services.php exists in /httpdocs/ ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/httpdocs-services.php "ftp://$FTP_HOST/httpdocs/services.php" 2>&1
-          echo "Size: $(wc -c < /tmp/httpdocs-services.php) bytes"
-          echo "Content (first 10 lines):"
-          head -10 /tmp/httpdocs-services.php
-
-          echo ""
-          echo "=== LIST ALL DIRECTORIES RECURSIVELY (depth 1) ==="
-          for d in admin data includes tools; do
-            echo "--- /$d ---"
-            curl -s --connect-timeout 10 --max-time 15 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/$d/" 2>&1 | head -10
+          echo "=== CHECK OUR NEW FILES ==="
+          for f in index.php resources.php about.php tools/maturity.php includes/header.php; do
+            code=$(curl -s --connect-timeout 10 --max-time 15 -o /dev/null -w "%{http_code}" -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/$f" 2>&1)
+            echo "$f -> $code"
           done
