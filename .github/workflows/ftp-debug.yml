@@ -7,33 +7,68 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Upload marker file and test live fetch
+      - name: Probe FTP root, httpdocs, and public_html
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
-          MARKER="grdg-probe-$(date +%s).txt"
+          set +e
+          TS=$(date +%s)
+          MARKER="grdg-probe-${TS}.txt"
           echo "PleskProbeOK-$MARKER" > /tmp/$MARKER
-          echo "=== UPLOAD $MARKER to FTP root ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$MARKER" 2>&1
-          echo "upload exit: $?"
+
+          echo "=== FTP ROOT LISTING (top-level dirs) ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | grep -E "^d|httpdocs|public_html|httpdocs|www" | head -40
+
+          for DIR in "" "httpdocs" "public_html" "httpdocs/public_html" "public_html/httpdocs"; do
+            if [ -z "$DIR" ]; then
+              LABEL="FTP_ROOT"
+              REMOTE_PATH="$MARKER"
+              LIST_URL="ftp://$FTP_HOST/"
+            else
+              LABEL="$DIR"
+              REMOTE_PATH="$DIR/$MARKER"
+              LIST_URL="ftp://$FTP_HOST/$DIR/"
+            fi
+
+            echo ""
+            echo "=== UPLOAD to $LABEL ($REMOTE_PATH) ==="
+            curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$REMOTE_PATH" 2>&1
+            echo "upload exit: $?"
+
+            echo "=== LIST $LABEL for marker ==="
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "$LIST_URL" 2>&1 | grep "$MARKER" || echo "(marker not listed)"
+
+            echo "=== LIVE FETCH https://groedge.in/$MARKER ==="
+            HTTP=$(curl -sk --connect-timeout 10 --max-time 20 -o /tmp/live-body -w "%{http_code}" "https://groedge.in/$MARKER")
+            BODY=$(cat /tmp/live-body 2>/dev/null)
+            echo "HTTP $HTTP body=$BODY"
+            if [ "$HTTP" = "200" ] && echo "$BODY" | grep -q "PleskProbeOK"; then
+              echo "SUCCESS: LIVE web root == $LABEL"
+            else
+              echo "NO MATCH for $LABEL"
+            fi
+
+            echo "=== CLEANUP $LABEL ==="
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "$LIST_URL" 2>&1 || true
+          done
+
           echo ""
-          echo "=== VERIFY LISTING shows it ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | grep "$MARKER"
+          echo "=== COMPARE key files in httpdocs vs public_html ==="
+          for f in index.php resources.php style.css; do
+            for d in httpdocs public_html; do
+              OUT="/tmp/${d}-$f"
+              curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o "$OUT" "ftp://$FTP_HOST/$d/$f"
+              SIZE=$(wc -c < "$OUT" 2>/dev/null || echo 0)
+              echo "$d/$f size=$SIZE"
+            done
+          done
+
           echo ""
-          echo "=== TRY FETCH FROM LIVE SITE ==="
-          HTTP=$(curl -sk --connect-timeout 10 --max-time 20 -o /dev/null -w "%{http_code}" "https://groedge.in/$MARKER" 2>&1)
-          echo "https://groedge.in/$MARKER -> HTTP $HTTP"
-          if [ "$HTTP" = "200" ]; then
-            echo "SUCCESS: FTP root == LIVE web root"
-            curl -sk --connect-timeout 10 --max-time 20 "https://groedge.in/$MARKER" 2>&1
-          else
-            echo "MISMATCH: FTP root is NOT the live web root"
-            echo "Also probing DNS IPs:"
-            getent hosts groedge.in | awk '{print $1}'
-          fi
+          echo "=== httpdocs listing (first 40) ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/" 2>&1 | head -40
+
           echo ""
-          echo "=== CLEANUP ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -X 'DELE' "ftp://$FTP_HOST/$MARKER" 2>&1 || curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "ftp://$FTP_HOST/" 2>&1
-          echo "cleanup attempted"
+          echo "=== public_html listing (first 40) ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/public_html/" 2>&1 | head -40
