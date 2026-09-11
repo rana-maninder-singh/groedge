@@ -1,10 +1,14 @@
-# Redirect legacy HTML pages to PHP
+# Prefer PHP entry points (nginx/Apache may otherwise serve legacy .html)
+DirectoryIndex index.php index.html
+
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule ^contact\.html$ contact.php [L,R=302]
-RewriteRule ^services\.html$ services.php [L,R=302]
-RewriteRule ^about\.html$ about.php [L,R=302]
-RewriteRule ^index\.html$ index.php [L,R=302]
+
+# Legacy HTML bookmarks → PHP
+RewriteRule ^contact\.html$ contact.php [L,R=301]
+RewriteRule ^services\.html$ services.php [L,R=301]
+RewriteRule ^about\.html$ about.php [L,R=301]
+RewriteRule ^index\.html$ index.php [L,R=301]
 </IfModule>
 
 # php -- BEGIN cPanel-generated handler, do not edit

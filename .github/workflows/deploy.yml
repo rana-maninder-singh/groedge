@@ -57,3 +57,19 @@ jobs:
             *.zip
             *.log
             .git*
+
+      # nginx prefers index.html over index.php — force-remove legacy HTML
+      - name: Remove legacy HTML that shadows PHP
+        env:
+          FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
+          FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
+          FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
+        run: |
+          set +e
+          for DIR in httpdocs groedge.in; do
+            for FILE in index.html about.html; do
+              echo "DELE /$DIR/$FILE"
+              curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $FILE" "ftp://$FTP_HOST/$DIR/" 
+            done
+          done
+          echo "Legacy HTML cleanup done"
