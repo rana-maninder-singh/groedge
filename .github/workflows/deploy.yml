@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Validate PHP syntax
+      - name: Validate PHP syntax (GroEdge)
         run: |
           sudo apt-get update && sudo apt-get install -y php-cli
           errors=0
@@ -30,22 +30,51 @@ jobs:
           fi
           echo "All PHP files pass syntax check"
 
-      # Primary domain: ranamanindersingh.com → /httpdocs/
-      - name: Deploy to ranamanindersingh.com (httpdocs)
+      # Personal domain: ranamanindersingh.com → /httpdocs/
+      - name: Deploy ranamanindersingh.com
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.CPANEL_FTP_HOST }}
           username: ${{ secrets.CPANEL_FTP_USER }}
           password: ${{ secrets.CPANEL_FTP_PASS }}
           server-dir: /httpdocs/
-          local-dir: ./public_html/
+          local-dir: ./ranamanindersingh/
           exclude: |
             *.zip
             *.log
             .git*
 
-      # Addon domain: groedge.in → /groedge.in/
-      - name: Deploy to groedge.in
+      # Strip leftover GroEdge files from the personal domain root
+      - name: Remove GroEdge leftovers from httpdocs
+        env:
+          FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
+          FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
+          FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
+        run: |
+          set +e
+          DIR="httpdocs"
+          FILES=(
+            index.php about.php about.html services.php contact.php projects.php
+            resources.php blog.php article.php industries.php industry.php 404.php
+            script.js services-script.js contact-script.js sitemap.xml logo.png logo.jpg
+            hero.jpg about.jpg contact.jpg services.jpg
+          )
+          for FILE in "${FILES[@]}"; do
+            echo "DELE /$DIR/$FILE"
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $FILE" "ftp://$FTP_HOST/$DIR/"
+          done
+          for SUB in admin data includes tools; do
+            echo "Listing /$DIR/$SUB for recursive delete is limited over FTP; wipe key files"
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/$DIR/$SUB/" 2>/dev/null | awk '/^-/ {print $NF}' | while read -r f; do
+              [ -n "$f" ] || continue
+              curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $f" "ftp://$FTP_HOST/$DIR/$SUB/"
+            done
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-RMD $SUB" "ftp://$FTP_HOST/$DIR/"
+          done
+          echo "httpdocs GroEdge cleanup done"
+
+      # GroEdge: groedge.in → /groedge.in/
+      - name: Deploy groedge.in
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.CPANEL_FTP_HOST }}
@@ -58,18 +87,16 @@ jobs:
             *.log
             .git*
 
-      # nginx prefers index.html over index.php — force-remove legacy HTML
-      - name: Remove legacy HTML that shadows PHP
+      # nginx prefers index.html over index.php on GroEdge — remove any leftover HTML
+      - name: Remove legacy HTML on groedge.in
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
           set +e
-          for DIR in httpdocs groedge.in; do
-            for FILE in index.html about.html; do
-              echo "DELE /$DIR/$FILE"
-              curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $FILE" "ftp://$FTP_HOST/$DIR/" 
-            done
+          for FILE in index.html about.html; do
+            echo "DELE /groedge.in/$FILE"
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $FILE" "ftp://$FTP_HOST/groedge.in/"
           done
           echo "Legacy HTML cleanup done"
