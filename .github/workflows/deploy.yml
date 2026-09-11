@@ -30,13 +30,28 @@ jobs:
           fi
           echo "All PHP files pass syntax check"
 
-      - name: Deploy to cPanel
+      # Primary domain: ranamanindersingh.com → /httpdocs/
+      - name: Deploy to ranamanindersingh.com (httpdocs)
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.CPANEL_FTP_HOST }}
           username: ${{ secrets.CPANEL_FTP_USER }}
           password: ${{ secrets.CPANEL_FTP_PASS }}
           server-dir: /httpdocs/
+          local-dir: ./public_html/
+          exclude: |
+            *.zip
+            *.log
+            .git*
+
+      # Addon domain: groedge.in → /groedge.in/
+      - name: Deploy to groedge.in
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.CPANEL_FTP_HOST }}
+          username: ${{ secrets.CPANEL_FTP_USER }}
+          password: ${{ secrets.CPANEL_FTP_PASS }}
+          server-dir: /groedge.in/
           local-dir: ./public_html/
           exclude: |
             *.zip

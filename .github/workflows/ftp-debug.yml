@@ -7,7 +7,7 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Find real document root
+      - name: Confirm domain document roots
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
@@ -18,66 +18,32 @@ jobs:
           MARKER="grdg-probe-${TS}.txt"
           echo "PleskProbeOK-$MARKER" > /tmp/$MARKER
 
-          echo "=== FULL FTP ROOT LISTING ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1
+          # Likely addon domain folder names (may be secret-masked in logs)
+          CANDIDATES=(
+            "httpdocs"
+            "public_html"
+            "groedge.in"
+            "www.groedge.in"
+            "ranamanindersingh.com"
+            "www.ranamanindersingh.com"
+            "groedge"
+          )
 
-          echo ""
-          echo "=== LIST git/ ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/git/" 2>&1 | head -50
-
-          echo ""
-          echo "=== FIND style.css size 20774 (live old) anywhere ==="
-          # Check known dirs + one level of subdirs named like domain
-          for d in "" httpdocs public_html git httpdocs/git public_html/httpdocs; do
-            path="${d:+$d/}style.css"
-            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/s.css "ftp://$FTP_HOST/$path"
-            sz=$(wc -c < /tmp/s.css 2>/dev/null || echo 0)
-            echo "GET $path -> $sz bytes"
-          done
-
-          echo ""
-          echo "=== Enumerate first-level dirs and probe each with marker ==="
-          # Parse directory names from LIST (5th field onward after permissions/links/owner/group/size/month/day/time)
-          mapfile -t ENTRIES < <(curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | awk '/^d/ {print $NF}')
-          echo "Dirs found: ${ENTRIES[*]}"
-
-          for DIR in "${ENTRIES[@]}"; do
-            [ -z "$DIR" ] && continue
-            [ "$DIR" = "." ] || [ "$DIR" = ".." ] && continue
+          for DIR in "${CANDIDATES[@]}"; do
             echo ""
-            echo "=== PROBE DIR: $DIR ==="
+            echo "=== TRY $DIR ==="
             curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$DIR/$MARKER"
-            echo "upload exit: $?"
-            HTTP=$(curl -sk --connect-timeout 10 --max-time 15 -o /tmp/live-body -w "%{http_code}" "https://groedge.in/$MARKER")
-            BODY=$(head -c 80 /tmp/live-body 2>/dev/null)
-            echo "live HTTP $HTTP body=$BODY"
-            if [ "$HTTP" = "200" ] && grep -q "PleskProbeOK" /tmp/live-body 2>/dev/null; then
-              echo "SUCCESS: LIVE web root == /$DIR/"
-            fi
-            # also check style.css size in this dir
-            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/s.css "ftp://$FTP_HOST/$DIR/style.css"
-            echo "$DIR/style.css size=$(wc -c < /tmp/s.css 2>/dev/null)"
-            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "ftp://$FTP_HOST/$DIR/" >/dev/null 2>&1 || true
+            echo "upload_exit=$?"
 
-            # If dir looks like a vhost, also try its httpdocs/public_html
-            for sub in httpdocs public_html httpdocs/public_html; do
-              curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$DIR/$sub/$MARKER" 2>/dev/null
-              up=$?
-              if [ $up -eq 0 ]; then
-                HTTP=$(curl -sk --connect-timeout 10 --max-time 15 -o /tmp/live-body -w "%{http_code}" "https://groedge.in/$MARKER")
-                echo "  probe $DIR/$sub -> live HTTP $HTTP"
-                if [ "$HTTP" = "200" ] && grep -q "PleskProbeOK" /tmp/live-body 2>/dev/null; then
-                  echo "SUCCESS: LIVE web root == /$DIR/$sub/"
-                fi
-                curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/s.css "ftp://$FTP_HOST/$DIR/$sub/style.css"
-                echo "  $DIR/$sub/style.css size=$(wc -c < /tmp/s.css 2>/dev/null)"
-                curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "ftp://$FTP_HOST/$DIR/$sub/" >/dev/null 2>&1 || true
-              fi
+            for HOST in "https://groedge.in" "https://ranamanindersingh.com"; do
+              HTTP=$(curl -sk --connect-timeout 10 --max-time 15 -o /tmp/body -w "%{http_code}" "$HOST/$MARKER")
+              HIT="no"
+              if [ "$HTTP" = "200" ] && grep -q "PleskProbeOK" /tmp/body 2>/dev/null; then HIT="YES"; fi
+              echo "$HOST <- /$DIR/ => HTTP $HTTP hit=$HIT"
             done
-          done
 
-          echo ""
-          echo "=== FTP PWD / whoami clues ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "PWD" "ftp://$FTP_HOST/" 2>&1 | head -20
-          echo "FTP_USER length: ${#FTP_USER}"
-          echo "FTP_HOST=$FTP_HOST"
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/s.css "ftp://$FTP_HOST/$DIR/style.css"
+            echo "/$DIR/style.css bytes=$(wc -c < /tmp/s.css 2>/dev/null || echo 0)"
+
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "ftp://$FTP_HOST/$DIR/" >/dev/null 2>&1 || true
+          done
