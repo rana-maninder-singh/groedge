@@ -1,4 +1,4 @@
-name: FTP Debug - Test httpdocs Access
+name: FTP Debug - Download index.html
 
 on:
   workflow_dispatch:
@@ -7,21 +7,42 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Test httpdocs access
+      - name: Download and inspect index.html from FTP root
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
-          echo "=== VERBOSE LIST httpdocs ==="
-          curl -v --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/" 2>&1 | tail -30
+          echo "=== DOWNLOAD index.html from / ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/root-index.html "ftp://$FTP_HOST/index.html" 2>&1
+          echo "Size: $(wc -c < /tmp/root-index.html) bytes"
+          echo "Content:"
+          cat /tmp/root-index.html
+
           echo ""
-          echo "=== UPLOAD TEST FILE to httpdocs ==="
-          echo "test-$RANDOM" > /tmp/probe.txt
-          curl -v --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" -T /tmp/probe.txt "ftp://$FTP_HOST/httpdocs/probe.txt" 2>&1 | tail -15
+          echo "=== DOWNLOAD index.html from /httpdocs/ ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/httpdocs-index.html "ftp://$FTP_HOST/httpdocs/index.html" 2>&1
+          echo "Size: $(wc -c < /tmp/httpdocs-index.html) bytes"
+          echo "Content:"
+          cat /tmp/httpdocs-index.html
+
           echo ""
-          echo "=== LIST ACCOUNT HOME TOP LEVEL ==="
-          curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1
+          echo "=== CHECK services.php at FTP root ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/root-services.php "ftp://$FTP_HOST/services.php" 2>&1
+          echo "Size: $(wc -c < /tmp/root-services.php) bytes"
+          echo "Content (first 10 lines):"
+          head -10 /tmp/root-services.php
+
           echo ""
-          echo "=== SEARCH FOR WEB ROOT: /var/www/vhosts (if accessible) ==="
-          curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/index.php" 2>&1 | head -5 || echo "no index.php entry"
+          echo "=== CHECK if services.php exists in /httpdocs/ ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/httpdocs-services.php "ftp://$FTP_HOST/httpdocs/services.php" 2>&1
+          echo "Size: $(wc -c < /tmp/httpdocs-services.php) bytes"
+          echo "Content (first 10 lines):"
+          head -10 /tmp/httpdocs-services.php
+
+          echo ""
+          echo "=== LIST ALL DIRECTORIES RECURSIVELY (depth 1) ==="
+          for d in admin data includes tools; do
+            echo "--- /$d ---"
+            curl -s --connect-timeout 10 --max-time 15 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/$d/" 2>&1 | head -10
+          done
