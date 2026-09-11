@@ -1,4 +1,4 @@
-name: FTP Debug - List Web Root Contents
+name: FTP Debug - Confirm Server Identity
 
 on:
   workflow_dispatch:
@@ -7,17 +7,33 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: List FTP web root
+      - name: Compare cluster and files
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
         run: |
-          echo "=== FTP ROOT (web root) FULL LISTING ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1
+          echo "=== FTP HOST RESOLUTION ==="
+          echo "$FTP_HOST"
+          getent hosts "$FTP_HOST" || nslookup "$FTP_HOST" 2>&1 | tail -5
+
           echo ""
-          echo "=== CHECK OUR NEW FILES ==="
-          for f in index.php resources.php about.php tools/maturity.php includes/header.php; do
-            code=$(curl -s --connect-timeout 10 --max-time 15 -o /dev/null -w "%{http_code}" -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/$f" 2>&1)
-            echo "$f -> $code"
-          done
+          echo "=== LIVE groedge.in RESOLUTION ==="
+          getent hosts groedge.in || nslookup groedge.in 2>&1 | tail -5
+
+          echo ""
+          echo "=== DOWNLOAD index.php FROM FTP ROOT ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/index.php "ftp://$FTP_HOST/index.php" 2>&1
+          echo "Size: $(wc -c < /tmp/index.php) bytes"
+          echo "First line: $(head -1 /tmp/index.php)"
+          if grep -q "mega-menu\|industries" /tmp/index.php; then echo "CONTAINS NEW NAV"; else echo "NO NEW NAV"; fi
+
+          echo ""
+          echo "=== DOWNLOAD resources.php FROM FTP ROOT ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/resources.php "ftp://$FTP_HOST/resources.php" 2>&1
+          echo "Size: $(wc -c < /tmp/resources.php) bytes"
+          if grep -q "Resource\|Download\|tools/\|Try tool" /tmp/resources.php; then echo "CONTAINS RESOURCE TOOLS"; else echo "NO RESOURCE CONTENT"; fi
+
+          echo ""
+          echo "=== LIST PARENT STRUCTURE (look for phtml/index pattern) ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | grep -E "index|php|html|tools|includes" | head -20
