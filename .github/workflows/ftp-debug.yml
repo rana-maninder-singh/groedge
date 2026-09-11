@@ -7,7 +7,7 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe FTP root, httpdocs, and public_html
+      - name: Find real document root
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
@@ -18,57 +18,66 @@ jobs:
           MARKER="grdg-probe-${TS}.txt"
           echo "PleskProbeOK-$MARKER" > /tmp/$MARKER
 
-          echo "=== FTP ROOT LISTING (top-level dirs) ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | grep -E "^d|httpdocs|public_html|httpdocs|www" | head -40
+          echo "=== FULL FTP ROOT LISTING ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1
 
-          for DIR in "" "httpdocs" "public_html" "httpdocs/public_html" "public_html/httpdocs"; do
-            if [ -z "$DIR" ]; then
-              LABEL="FTP_ROOT"
-              REMOTE_PATH="$MARKER"
-              LIST_URL="ftp://$FTP_HOST/"
-            else
-              LABEL="$DIR"
-              REMOTE_PATH="$DIR/$MARKER"
-              LIST_URL="ftp://$FTP_HOST/$DIR/"
-            fi
+          echo ""
+          echo "=== LIST git/ ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/git/" 2>&1 | head -50
 
-            echo ""
-            echo "=== UPLOAD to $LABEL ($REMOTE_PATH) ==="
-            curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$REMOTE_PATH" 2>&1
-            echo "upload exit: $?"
-
-            echo "=== LIST $LABEL for marker ==="
-            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "$LIST_URL" 2>&1 | grep "$MARKER" || echo "(marker not listed)"
-
-            echo "=== LIVE FETCH https://groedge.in/$MARKER ==="
-            HTTP=$(curl -sk --connect-timeout 10 --max-time 20 -o /tmp/live-body -w "%{http_code}" "https://groedge.in/$MARKER")
-            BODY=$(cat /tmp/live-body 2>/dev/null)
-            echo "HTTP $HTTP body=$BODY"
-            if [ "$HTTP" = "200" ] && echo "$BODY" | grep -q "PleskProbeOK"; then
-              echo "SUCCESS: LIVE web root == $LABEL"
-            else
-              echo "NO MATCH for $LABEL"
-            fi
-
-            echo "=== CLEANUP $LABEL ==="
-            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "$LIST_URL" 2>&1 || true
+          echo ""
+          echo "=== FIND style.css size 20774 (live old) anywhere ==="
+          # Check known dirs + one level of subdirs named like domain
+          for d in "" httpdocs public_html git httpdocs/git public_html/httpdocs; do
+            path="${d:+$d/}style.css"
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/s.css "ftp://$FTP_HOST/$path"
+            sz=$(wc -c < /tmp/s.css 2>/dev/null || echo 0)
+            echo "GET $path -> $sz bytes"
           done
 
           echo ""
-          echo "=== COMPARE key files in httpdocs vs public_html ==="
-          for f in index.php resources.php style.css; do
-            for d in httpdocs public_html; do
-              OUT="/tmp/${d}-$f"
-              curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o "$OUT" "ftp://$FTP_HOST/$d/$f"
-              SIZE=$(wc -c < "$OUT" 2>/dev/null || echo 0)
-              echo "$d/$f size=$SIZE"
+          echo "=== Enumerate first-level dirs and probe each with marker ==="
+          # Parse directory names from LIST (5th field onward after permissions/links/owner/group/size/month/day/time)
+          mapfile -t ENTRIES < <(curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" 2>&1 | awk '/^d/ {print $NF}')
+          echo "Dirs found: ${ENTRIES[*]}"
+
+          for DIR in "${ENTRIES[@]}"; do
+            [ -z "$DIR" ] && continue
+            [ "$DIR" = "." ] || [ "$DIR" = ".." ] && continue
+            echo ""
+            echo "=== PROBE DIR: $DIR ==="
+            curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$DIR/$MARKER"
+            echo "upload exit: $?"
+            HTTP=$(curl -sk --connect-timeout 10 --max-time 15 -o /tmp/live-body -w "%{http_code}" "https://groedge.in/$MARKER")
+            BODY=$(head -c 80 /tmp/live-body 2>/dev/null)
+            echo "live HTTP $HTTP body=$BODY"
+            if [ "$HTTP" = "200" ] && grep -q "PleskProbeOK" /tmp/live-body 2>/dev/null; then
+              echo "SUCCESS: LIVE web root == /$DIR/"
+            fi
+            # also check style.css size in this dir
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/s.css "ftp://$FTP_HOST/$DIR/style.css"
+            echo "$DIR/style.css size=$(wc -c < /tmp/s.css 2>/dev/null)"
+            curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "ftp://$FTP_HOST/$DIR/" >/dev/null 2>&1 || true
+
+            # If dir looks like a vhost, also try its httpdocs/public_html
+            for sub in httpdocs public_html httpdocs/public_html; do
+              curl -s --connect-timeout 10 --max-time 25 -u "$FTP_USER:$FTP_PASS" -T /tmp/$MARKER "ftp://$FTP_HOST/$DIR/$sub/$MARKER" 2>/dev/null
+              up=$?
+              if [ $up -eq 0 ]; then
+                HTTP=$(curl -sk --connect-timeout 10 --max-time 15 -o /tmp/live-body -w "%{http_code}" "https://groedge.in/$MARKER")
+                echo "  probe $DIR/$sub -> live HTTP $HTTP"
+                if [ "$HTTP" = "200" ] && grep -q "PleskProbeOK" /tmp/live-body 2>/dev/null; then
+                  echo "SUCCESS: LIVE web root == /$DIR/$sub/"
+                fi
+                curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -o /tmp/s.css "ftp://$FTP_HOST/$DIR/$sub/style.css"
+                echo "  $DIR/$sub/style.css size=$(wc -c < /tmp/s.css 2>/dev/null)"
+                curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "-DELE $MARKER" "ftp://$FTP_HOST/$DIR/$sub/" >/dev/null 2>&1 || true
+              fi
             done
           done
 
           echo ""
-          echo "=== httpdocs listing (first 40) ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/httpdocs/" 2>&1 | head -40
-
-          echo ""
-          echo "=== public_html listing (first 40) ==="
-          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/public_html/" 2>&1 | head -40
+          echo "=== FTP PWD / whoami clues ==="
+          curl -s --connect-timeout 10 --max-time 20 -u "$FTP_USER:$FTP_PASS" -Q "PWD" "ftp://$FTP_HOST/" 2>&1 | head -20
+          echo "FTP_USER length: ${#FTP_USER}"
+          echo "FTP_HOST=$FTP_HOST"
