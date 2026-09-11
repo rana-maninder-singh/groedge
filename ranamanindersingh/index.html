@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rana Maninder Singh</title>
-  <meta name="description" content="Personal site of Rana Maninder Singh.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Data &amp; Analytics Lab</title>
+  <script>
+    (function () {
+      var h = window.location.hash;
+      if (!h || h === "#") h = "#home";
+      window.location.replace("/website/" + h);
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=/website/#home" />
+  </noscript>
 </head>
 <body>
-  <div class="atmosphere" aria-hidden="true"></div>
-  <main class="stage">
-    <p class="eyebrow">Personal site</p>
-    <h1>Rana Maninder Singh</h1>
-    <p class="lead">Builder and operator based in India. This is my personal home on the web.</p>
-    <div class="actions">
-      <a class="btn primary" href="mailto:hello@ranamanindersingh.com">Email me</a>
-    </div>
-  </main>
+  <p>Redirecting to the <a id="lab-link" href="/website/#home">learning lab</a>…</p>
+  <script>
+    (function () {
+      var h = window.location.hash;
+      if (!h || h === "#") h = "#home";
+      var a = document.getElementById("lab-link");
+      if (a) a.setAttribute("href", "/website/" + h);
+    })();
+  </script>
 </body>
 </html>

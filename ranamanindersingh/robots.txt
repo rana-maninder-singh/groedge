@@ -1,3 +1,0 @@
-# Personal domain — keep crawlers light
-User-agent: *
-Allow: /
