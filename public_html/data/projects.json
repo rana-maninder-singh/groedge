@@ -2,76 +2,83 @@
     "key_achievements": [
         {
             "label": "18+",
-            "description": "Years in operations & Lean"
+            "description": "Years Rajesh has led this work"
         },
         {
-            "label": "20–45%",
-            "description": "Typical cycle-time gains"
+            "label": "16,500",
+            "description": "Metres a day, up from 12,000 on a textile line"
         },
         {
-            "label": "15–30%",
-            "description": "Cost opportunity ranges"
+            "label": "₹8.9 cr",
+            "description": "Monthly dispatch top line, up from ₹5 cr"
         },
         {
-            "label": "On-site",
-            "description": "Implementation, not decks alone"
+            "label": "5.00%",
+            "description": "Finishing loss, down from 8.80% in paper"
         }
     ],
     "projects": [
         {
-            "id": "proj-1",
-            "title": "Procurement-to-delivery flow reset",
-            "client": "Tier-1 automotive components manufacturer",
-            "industry": "Manufacturing",
-            "year": "2024",
-            "description": "A multi-plant supplier faced growing lead times and rising inventory despite strong demand. GroEdge redesigned the end-to-end material and information flow—from planning signals to dispatch—so plants could promise dates they could keep.",
+            "id": "proj-textile-up",
+            "title": "More metres out the door, without a new line",
+            "client": "Leading textile manufacturer, Uttar Pradesh",
+            "industry": "Textiles",
+            "year": "",
+            "description": "The plant needed more throughput and a higher dispatch top line, and the organisation was resisting the change. Rajesh ran a large-scale interactive process so leadership and the floor could agree the vision and the action plan. That was followed by lean manufacturing, structured problem solving, and process re-engineering on the line.",
             "achievements": [
-                "Average lead time cut by 35%",
-                "Finished-goods inventory down 22%",
-                "On-time delivery lifted from 78% to 96%",
-                "Common standards rolled out across 4 regional plants"
+                "Throughput from 12,000 to 16,500 metres a day",
+                "Monthly unit-dispatch top line from ₹5 crore to ₹8.9 crore",
+                "Change programme designed so the line could run the new way, not only hear it"
             ]
         },
         {
-            "id": "proj-2",
-            "title": "Lean transformation on critical product lines",
-            "client": "Mid-size healthcare equipment manufacturer",
-            "industry": "Healthcare / Medical devices",
-            "year": "2024",
-            "description": "Capacity was capped by long changeovers and unstable quality. We ran value-stream mapping, SMED, and standard work with production teams—then locked gains with a daily management rhythm.",
+            "id": "proj-paper-punjab",
+            "title": "Stop the loss that was sitting in finishing",
+            "client": "Leading paper manufacturer, Punjab",
+            "industry": "Paper",
+            "year": "",
+            "description": "Finishing loss was eating yield on a plant that already knew how to make paper. The work was on the operation itself: find where good output was being lost, and hold the gain.",
             "achievements": [
-                "Throughput up ~40% on priority lines",
-                "Critical equipment setup time cut by 60%",
-                "First-pass yield improved from 91% to 98.5%",
-                "Supervisors and operators certified in Lean fundamentals"
+                "Finishing loss cut from 8.80% to 5.00%",
+                "Improvement made inside the existing operation, not by adding a new line"
             ]
         },
         {
-            "id": "proj-3",
-            "title": "Distribution centre redesign for growth",
-            "client": "National consumer goods distributor",
-            "industry": "Logistics",
-            "year": "2023",
-            "description": "An 80,000 sq ft DC needed to absorb ~30% volume growth without a matching jump in labour cost. We redesigned layout, slotting, and pick paths, then restaffed roles around the new flow.",
+            "id": "proj-textile-north",
+            "title": "A daily rhythm for dispatch and fabric quality",
+            "client": "Major textile firm, north India",
+            "industry": "Textiles",
+            "year": "",
+            "description": "Throughput and machine efficiency were the commercial problem. Quality reprocessing was hiding inside the same system. Rajesh helped put a daily monitoring and order-dispatch system in place, and traced the root causes of reprocessing and poor fabric quality.",
             "achievements": [
-                "Pick-path distance reduced by 45%",
-                "Daily throughput capacity +38%",
-                "Labour cost per order down 25%",
-                "Zero recordable safety incidents over the following 12 months"
+                "Higher throughput and better machine efficiency",
+                "Daily monitoring and an order-dispatch system the team could run",
+                "Root-cause work on reprocessing and poor fabric quality"
             ]
         },
         {
-            "id": "proj-4",
-            "title": "Operational diligence & site consolidation",
-            "client": "Private equity–backed industrial business",
-            "industry": "Industrial / Professional services",
-            "year": "2023",
-            "description": "Pre-deal operational diligence identified integration risks and synergy levers. Post-close, GroEdge supported consolidation of two manufacturing sites and alignment of processes without disrupting key accounts.",
+            "id": "proj-fv-retail",
+            "title": "A shorter path from source to store",
+            "client": "Major organised fruit and vegetable retailer",
+            "industry": "Retail supply chain",
+            "year": "",
+            "description": "Lead time and supply-chain efficiency were limiting how fast fresh product could move. Rajesh developed a backward-integration strategy, and used market and trend analysis to shape the growth plan — not only the warehouse layout.",
             "achievements": [
-                "Identified ₹17+ crore annual synergy opportunity",
-                "Two sites consolidated within 8 months",
-                "Unified ERP and management reporting in year one",
-                "Zero missed commitments to priority customers during cutover"
+                "Backward integration to improve supply-chain efficiency",
+                "Shorter lead times",
+                "Growth strategy grounded in market and trend analysis"
+            ]
+        },
+        {
+            "id": "proj-dd-german",
+            "title": "See the operation before the decision is locked",
+            "client": "German manufacturer of heavy road-construction equipment",
+            "industry": "Industrial equipment",
+            "year": "",
+            "description": "Before a transaction, the operating reality has to be as clear as the financials. Rajesh led the operations due diligence — where the risk actually sits on the floor, not only in the data room.",
+            "achievements": [
+                "Operations due diligence for a cross-border industrial business",
+                "A view of operating risk that a spreadsheet review does not give"
             ]
         }
     ]

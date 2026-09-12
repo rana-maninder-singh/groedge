@@ -34,10 +34,10 @@ include __DIR__ . '/includes/header.php';
     <!-- B) TRUST BAR -->
     <div class="trust-bar">
         <div class="trust-bar-inner">
-            <div class="trust-stat"><strong>50+</strong> Plants delivered</div>
-            <div class="trust-stat"><strong>18+</strong> Years experience</div>
-            <div class="trust-stat"><strong>6</strong> Sectors served</div>
-            <div class="trust-stat"><strong>20-45%</strong> Typical process gains</div>
+            <div class="trust-stat"><strong>18+</strong> Years on the work</div>
+            <div class="trust-stat"><strong>16,500</strong> Metres/day, textile line</div>
+            <div class="trust-stat"><strong>₹8.9 cr</strong> Monthly dispatch top line</div>
+            <div class="trust-stat"><strong>5%</strong> Finishing loss, from 8.8%</div>
         </div>
     </div>
 
@@ -95,39 +95,40 @@ include __DIR__ . '/includes/header.php';
 
             <!-- E) RESULTS CLIENTS TYPICALLY UNLOCK -->
             <div class="home-band reveal">
-                <h2>Results clients typically unlock</h2>
-                <p style="margin-bottom: 8px;">Indicative outcomes from recent operational excellence engagements. Exact results depend on starting point and scope.</p>
+                <h2>Results from the work, not a range</h2>
+                <p style="margin-bottom: 8px;">These are outcomes from engagements led by Rajesh Pal. Your number depends on the starting point — we will not promise a band we cannot stand behind.</p>
                 <div class="stats-container">
                     <div class="stat">
                         <h3>18+</h3>
-                        <p>Years in operations &amp; Lean practice</p>
+                        <p>Years in change, operations, and lean</p>
                     </div>
                     <div class="stat">
-                        <h3>20–45%</h3>
-                        <p>Process cycle-time improvement</p>
+                        <h3>16,500</h3>
+                        <p>Metres a day, up from 12,000 on a textile line</p>
                     </div>
                     <div class="stat">
-                        <h3>15–30%</h3>
-                        <p>Operating cost opportunity identified</p>
+                        <h3>₹8.9 cr</h3>
+                        <p>Monthly dispatch top line, up from ₹5 cr</p>
                     </div>
                     <div class="stat">
-                        <h3>On-site</h3>
-                        <p>Implementation, not slide decks alone</p>
+                        <h3>5.00%</h3>
+                        <p>Finishing loss, down from 8.80% in paper</p>
                     </div>
                 </div>
+                <p style="margin-top: 20px;"><a href="projects.php">See the engagements</a></p>
             </div>
 
             <!-- F) SECTORS WE KNOW WELL -->
             <div class="home-band reveal">
-                <h2>Sectors we know well</h2>
-                <p>We work where physical flow, compliance, and delivery pressure collide—and where small process changes create outsized P&amp;L impact.</p>
+                <h2>Where this work has already landed</h2>
+                <p>Textiles, paper, organised fresh retail, and industrial equipment — manufacturing and services, where flow, yield, and lead time show up in the P&amp;L.</p>
                 <div class="sector-strip">
+                    <span>Textiles</span>
+                    <span>Paper</span>
+                    <span>Retail supply chain</span>
+                    <span>Industrial equipment</span>
                     <span>Manufacturing</span>
-                    <span>Pharmaceuticals</span>
-                    <span>Chemicals</span>
-                    <span>Engineering</span>
-                    <span>Textiles &amp; Garments</span>
-                    <span>Logistics &amp; Distribution</span>
+                    <span>Services</span>
                 </div>
             </div>
 
