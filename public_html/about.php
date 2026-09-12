@@ -3,8 +3,8 @@ define('DATA_DIR', __DIR__ . '/data');
 require_once __DIR__ . '/includes/config.php';
 $cfg = get_config();
 $base_path = '';
-$page_title = 'About GroEdge | Hands-On Operational Excellence Consulting';
-$page_description = 'GroEdge is an India-rooted operational excellence practice. We bridge strategy and shop-floor execution for manufacturers, pharma, and supply-chain organisations.';
+$page_title = 'About Rajesh Pal | Operational Excellence Consultant | GroEdge';
+$page_description = 'Rajesh Pal founded GroEdge. More than 18 years in change, lean, and supply chain. PMP, Six Sigma Black Belt, Master’s in Business Leadership from SOL.';
 $current_page = 'about';
 include __DIR__ . '/includes/header.php';
 ?>

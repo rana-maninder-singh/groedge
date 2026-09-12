@@ -1,6 +1,6 @@
 <?php
-$page_title = 'GroEdge | Operational Excellence Consulting for Manufacturers & Supply Chains';
-$page_description = 'GroEdge helps manufacturing, pharma, and supply-chain leaders cut waste, raise throughput, and build operations that hold under growth pressure—on the shop floor, not only in the boardroom.';
+$page_title = 'Rajesh Pal | Operational Excellence Consultant in India | GroEdge';
+$page_description = 'Rajesh Pal is a PMP and Six Sigma Black Belt. GroEdge helps manufacturers in India raise throughput, cut loss, and shorten supply-chain lead times — on the floor, not in a slide deck.';
 $current_page = 'home';
 $base_path = '';
 
@@ -13,6 +13,39 @@ $testimonials = $testimonials_data['testimonials'] ?? [];
 $blog_data = get_blog_data();
 $blog_posts = $blog_data['posts'] ?? [];
 $services_data = get_services_data();
+
+$faq = [
+    [
+        'q' => 'Who is Rajesh Pal?',
+        'a' => 'Rajesh Pal is the founder and principal consultant of GroEdge Management Consulting in Gurugram, India. He is a PMP and Six Sigma Black Belt with more than 18 years in change management, operations excellence, lean, and supply chain. He holds a degree in Business Administration and a Master’s in Business Leadership from the School of Inspired Leadership (SOL).',
+    ],
+    [
+        'q' => 'What does GroEdge do?',
+        'a' => 'GroEdge helps manufacturers and service operations improve throughput, yield, dispatch, and lead time. The work uses lean, structured problem solving, process re-engineering, TQM, TPM, 5S, kaizen, and large-scale interactive process (LIP) workshops so the plant can run the change.',
+    ],
+    [
+        'q' => 'What results has Rajesh Pal delivered?',
+        'a' => 'On a textile line in Uttar Pradesh, throughput rose from 12,000 to 16,500 metres a day and monthly dispatch top line moved from ₹5 crore to ₹8.9 crore. At a paper manufacturer in Punjab, finishing loss fell from 8.80% to 5.00%. Other work includes organised fruit-and-vegetable retail supply chain and operations due diligence for a German heavy-equipment manufacturer.',
+    ],
+    [
+        'q' => 'Where does GroEdge work?',
+        'a' => 'GroEdge is based in Gurugram, National Capital Region, and works on site across India. Completed work includes textiles in Uttar Pradesh and north India, paper in Punjab, organised retail supply chain, and industrial equipment.',
+    ],
+];
+$page_schema = json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'FAQPage',
+    'mainEntity' => array_map(function ($item) {
+        return [
+            '@type' => 'Question',
+            'name' => $item['q'],
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => $item['a'],
+            ],
+        ];
+    }, $faq),
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 include __DIR__ . '/includes/header.php';
 ?>
@@ -182,7 +215,16 @@ include __DIR__ . '/includes/header.php';
             </section>
             <?php endif; ?>
 
-            <!-- I) CTA SECTION -->
+            <!-- I) FAQ — visible answers for search and AI -->
+            <section class="home-band reveal" id="faq">
+                <h2>Questions buyers ask</h2>
+                <?php foreach ($faq as $item): ?>
+                <h3><?php echo htmlspecialchars($item['q']); ?></h3>
+                <p><?php echo htmlspecialchars($item['a']); ?></p>
+                <?php endforeach; ?>
+            </section>
+
+            <!-- J) CTA SECTION -->
             <div class="cta-section reveal">
                 <h2 style="color: white; text-align: center;">Find your highest-ROI operational fix</h2>
                 <p style="color: rgba(255,255,255,0.9); text-align: center; max-width: 700px; margin: 20px auto 30px;">Book a complimentary 60-minute assessment. We will pressure-test your biggest constraint and leave you with a shortlist of priorities—whether or not we work together next.</p>

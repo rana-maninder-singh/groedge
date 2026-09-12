@@ -1,8 +1,21 @@
 <?php
 if (!isset($base_path)) $base_path = '';
-if (!isset($page_title)) $page_title = 'GroEdge | Operational Excellence Consulting';
-if (!isset($page_description)) $page_description = 'GroEdge helps manufacturing, pharma, and supply-chain leaders cut waste, raise throughput, and build operations that hold under growth pressure.';
+if (!isset($page_title)) $page_title = 'Rajesh Pal | Operational Excellence Consultant in India | GroEdge';
+if (!isset($page_description)) $page_description = 'GroEdge is the operational excellence practice of Rajesh Pal, PMP and Six Sigma Black Belt. Lean, change, and supply-chain work for manufacturers in India.';
 if (!isset($current_page)) $current_page = '';
+if (!isset($page_canonical)) {
+    $canonical_paths = [
+        'home' => 'https://groedge.in/',
+        'about' => 'https://groedge.in/about.php',
+        'services' => 'https://groedge.in/services.php',
+        'projects' => 'https://groedge.in/projects.php',
+        'contact' => 'https://groedge.in/contact.php',
+        'blog' => 'https://groedge.in/blog.php',
+        'industries' => 'https://groedge.in/industries.php',
+        'resources' => 'https://groedge.in/resources.php',
+    ];
+    $page_canonical = $canonical_paths[$current_page] ?? 'https://groedge.in/';
+}
 if (!isset($cfg)) { define('DATA_DIR', __DIR__ . '/../data'); require_once __DIR__ . '/config.php'; $cfg = get_config(); }
 ?>
 <!DOCTYPE html>
@@ -12,18 +25,65 @@ if (!isset($cfg)) { define('DATA_DIR', __DIR__ . '/../data'); require_once __DIR
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($page_title); ?></title>
     <link rel="stylesheet" href="<?php echo $base_path; ?>style.css">
-    <link rel="icon" type="image/x-icon" href="<?php echo $base_path; ?>logo.png">
+    <link rel="icon" type="image/png" href="https://groedge.in/logo.png">
+    <link rel="canonical" href="<?php echo htmlspecialchars($page_canonical); ?>">
     <meta name="description" content="<?php echo htmlspecialchars($page_description); ?>">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Rajesh Pal">
     <meta property="og:title" content="<?php echo htmlspecialchars($page_title); ?>">
     <meta property="og:description" content="<?php echo htmlspecialchars($page_description); ?>">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://groedge.in/<?php echo $current_page === 'home' ? '' : $current_page; ?>">
-    <meta property="og:image" content="<?php echo $base_path; ?>logo.png">
+    <meta property="og:url" content="<?php echo htmlspecialchars($page_canonical); ?>">
+    <meta property="og:image" content="https://groedge.in/logo.png">
+    <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="GroEdge Management Consulting">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($page_title); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($page_description); ?>">
+    <meta name="twitter:image" content="https://groedge.in/logo.png">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"ProfessionalService","name":"GroEdge Management Consulting","description":"Operational excellence consulting for manufacturers, pharma, and supply chains.","url":"https://groedge.in","telephone":"+919870255501","email":"info@groedge.in","address":{"@type":"PostalAddress","addressLocality":"Gurugram","addressRegion":"Haryana","addressCountry":"IN"},"areaServed":"IN","serviceType":["Operational Excellence","Lean Manufacturing","Supply Chain Consulting","Digital Transformation"]}
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://groedge.in/#organization",
+          "name": "GroEdge Management Consulting",
+          "url": "https://groedge.in/",
+          "logo": "https://groedge.in/logo.png",
+          "image": "https://groedge.in/logo.png",
+          "description": "Operational excellence consulting led by Rajesh Pal. Change, lean, supply chain, and process work for manufacturers in India.",
+          "telephone": "+919870255501",
+          "email": "info@groedge.in",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Gurugram",
+            "addressRegion": "Haryana",
+            "addressCountry": "IN"
+          },
+          "areaServed": "IN",
+          "founder": { "@id": "https://groedge.in/about.php#rajesh" },
+          "knowsAbout": ["Operational excellence", "Lean manufacturing", "Change management", "Supply chain", "Six Sigma", "TQM", "TPM"]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://groedge.in/about.php#rajesh",
+          "name": "Rajesh Pal",
+          "jobTitle": "Founder and Principal Consultant",
+          "worksFor": { "@id": "https://groedge.in/#organization" },
+          "url": "https://groedge.in/about.php#rajesh",
+          "email": "rajesh@groedge.in",
+          "telephone": "+919870255501",
+          "description": "PMP and Six Sigma Black Belt with more than 18 years in change, operations excellence, lean, and supply chain across manufacturing and services in India.",
+          "alumniOf": "School of Inspired Leadership",
+          "hasCredential": ["PMP", "Six Sigma Black Belt"]
+        }
+      ]
+    }
     </script>
+    <?php if (!empty($page_schema)): ?>
+    <script type="application/ld+json"><?php echo $page_schema; ?></script>
+    <?php endif; ?>
 </head>
 <body>
 

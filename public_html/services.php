@@ -6,7 +6,7 @@ $base_path = '';
 
 $data = get_services_data();
 $page_title = ($data['page_title'] ?? 'Our Services') . ' | GroEdge';
-$page_description = 'GroEdge services: process &amp; flow, performance systems, operating model, technology fit, supply chain, and quality systems—implemented on site.';
+$page_description = 'GroEdge services led by Rajesh Pal: process and flow, performance systems, operating model, supply chain, and quality systems — implemented on site in India.';
 $page_intro = $data['page_intro'] ?? '';
 $intro_paragraph = $data['intro_paragraph'] ?? '';
 $pillars = $data['pillars'] ?? [];

@@ -8,8 +8,8 @@ $base_path = '';
 $data = get_industries_data();
 $industries = $data['industries'] ?? [];
 
-$page_title = 'Industries We Serve | GroEdge';
-$page_description = 'GroEdge delivers operational excellence consulting to pharmaceuticals, manufacturing, logistics, chemicals, textiles, and engineering sectors across India.';
+$page_title = 'Industries | Textiles, Paper, Manufacturing | GroEdge';
+$page_description = 'GroEdge, led by Rajesh Pal, has delivered operational work in textiles, paper, organised retail supply chain, and industrial equipment across India.';
 $current_page = 'industries';
 include __DIR__ . '/includes/header.php';
 ?>

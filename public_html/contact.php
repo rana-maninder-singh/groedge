@@ -2,8 +2,8 @@
 define('DATA_DIR', __DIR__ . '/data');
 require_once __DIR__ . '/includes/config.php';
 
-$page_title = 'Contact GroEdge | Book a Free Operational Assessment';
-$page_description = 'Schedule a complimentary 60-minute operational assessment with GroEdge. Identify your top constraints in cost, quality, capacity, or delivery.';
+$page_title = 'Contact Rajesh Pal | Book an Operational Assessment | GroEdge';
+$page_description = 'Talk to Rajesh Pal about throughput, yield, dispatch, or lead time. GroEdge is based in Gurugram and works on site across India.';
 $current_page = 'contact';
 $base_path = '';
 

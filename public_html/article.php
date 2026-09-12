@@ -21,6 +21,7 @@ if ($post === null) {
     $page_title = 'Article Not Found | GroEdge';
     $page_description = 'The requested article could not be found.';
     $current_page = 'blog';
+    $page_canonical = 'https://groedge.in/blog.php';
     include __DIR__ . '/includes/header.php';
     ?>
     <section class="page-banner">
@@ -48,12 +49,13 @@ foreach ($posts as $p) {
 }
 $related = array_slice($related, 0, 2);
 
-$article_url = 'https://groedge.in/article.php?slug=' . urlencode($slug);
+$article_url = 'https://groedge.in/article.php?slug=' . rawurlencode($slug);
 $share_title = urlencode($post['title'] ?? '');
 $share_text = urlencode($post['excerpt'] ?? '');
 
-$page_title = htmlspecialchars($post['title'] ?? 'Article') . ' | GroEdge Blog';
-$page_description = htmlspecialchars($post['excerpt'] ?? '');
+$page_title = ($post['title'] ?? 'Article') . ' | GroEdge';
+$page_description = $post['excerpt'] ?? '';
+$page_canonical = $article_url;
 $current_page = 'blog';
 include __DIR__ . '/includes/header.php';
 ?>
