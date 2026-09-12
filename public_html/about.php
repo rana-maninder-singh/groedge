@@ -94,30 +94,26 @@ include __DIR__ . '/includes/header.php';
                 </div>
             </div>
 
-            <div class="team-section">
-                <h2>Leadership</h2>
-                <p>Senior practitioners who have run operations—not only advised them.</p>
-
-                <div class="team-grid">
-                    <div class="team-member">
-                        <h3>Rajesh Pal</h3>
-                        <p style="color: #2c5282; font-weight: 500;">Founder &amp; Principal Consultant</p>
-                        <p>15+ years in operational excellence and Lean manufacturing. Former plant head in automotive components. Six Sigma Black Belt and TPS practitioner focused on flow, quality, and cost.</p>
-                        <p style="margin-top: 15px;"><strong>Focus:</strong> Process optimisation, Lean deployment, manufacturing excellence</p>
-                    </div>
-                    <div class="team-member">
-                        <h3>Gurpreet Kaur</h3>
-                        <p style="color: #2c5282; font-weight: 500;">Director, Digital &amp; Systems</p>
-                        <p>12+ years connecting technology to operating reality. Led ERP and digital programmes for manufacturers across India and Southeast Asia—always with process design first, software second.</p>
-                        <p style="margin-top: 15px;"><strong>Focus:</strong> Digital enablement, ERP/WMS fit, automation readiness</p>
-                    </div>
-                    <div class="team-member">
-                        <h3>Amit Kumar</h3>
-                        <p style="color: #2c5282; font-weight: 500;">Head of Supply Chain Practice</p>
-                        <p>14+ years in supply chain design and execution. Former supply chain head for a multinational FMCG network spanning India—inventory, logistics, and service-level trade-offs under real volume pressure.</p>
-                        <p style="margin-top: 15px;"><strong>Focus:</strong> Network design, inventory strategy, logistics performance</p>
+            <div class="founder-profile" id="rajesh">
+                <div class="founder-profile-head">
+                    <div class="founder-avatar" aria-hidden="true">RP</div>
+                    <div>
+                        <p class="founder-kicker">Founder &amp; Principal Consultant</p>
+                        <h2>Rajesh Pal</h2>
+                        <p class="founder-meta">PMP · Six Sigma Black Belt · 18+ years</p>
                     </div>
                 </div>
+                <p>Rajesh has spent more than 18 years leading change, business excellence, and process work across manufacturing and services. His programmes cover operations excellence, supply chain, and lean management systems — including the workshops that get a leadership team to a shared plan, not only a report.</p>
+                <p>He holds a degree in Business Administration and a Master’s in Business Leadership from the School of Inspired Leadership (SOL). He is a certified PMP and Six Sigma Black Belt, and works with LIP (Large-scale Interactive Process), TQM, TPM, lean, 5S, and kaizen.</p>
+                <h3>Selected results</h3>
+                <ul class="founder-results">
+                    <li><strong>Textile manufacturer, Uttar Pradesh.</strong> Business transformation using real-time strategic change, lean manufacturing, structured problem solving, and process re-engineering. Throughput rose from 12,000 to 16,500 metres a day. Monthly dispatch top line moved from ₹5 crore to ₹8.9 crore.</li>
+                    <li><strong>Paper manufacturer, Punjab.</strong> Finishing loss cut from 8.80% to 5.00%.</li>
+                    <li><strong>Organised fruit &amp; vegetable retail.</strong> Backward-integration strategy that improved supply-chain efficiency and reduced lead times, plus market analysis used to shape the growth plan.</li>
+                    <li><strong>German manufacturer of heavy road-construction equipment.</strong> Operations due diligence.</li>
+                    <li><strong>Textile firm, north India.</strong> Higher throughput and machine efficiency; a daily monitoring and order-dispatch system; root-cause work on reprocessing and fabric quality.</li>
+                </ul>
+                <p class="founder-cta"><a href="contact.php" class="btn btn-accent">Talk to Rajesh</a></p>
             </div>
 
             <div style="text-align: center; margin-top: 50px; padding: 40px; background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%); color: white; border-radius: 8px;">

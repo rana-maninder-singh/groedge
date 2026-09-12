@@ -101,7 +101,7 @@ include __DIR__ . '/includes/header.php';
             <div class="author-bio-text">
                 <h4>About the author</h4>
                 <p class="author-bio-name">Rajesh Pal</p>
-                <p>Principal consultant at GroEdge Management Consulting. Rajesh brings over 15 years of hands-on experience helping manufacturing, pharmaceutical, and supply chain organisations achieve measurable operational excellence across India.</p>
+                <p>Founder and principal consultant at GroEdge. More than 18 years in change, operations excellence, and lean across manufacturing and services. PMP and Six Sigma Black Belt. <a href="about.php#rajesh">Read his profile</a>.</p>
             </div>
         </div>
 

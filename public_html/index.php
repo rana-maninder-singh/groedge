@@ -35,7 +35,7 @@ include __DIR__ . '/includes/header.php';
     <div class="trust-bar">
         <div class="trust-bar-inner">
             <div class="trust-stat"><strong>50+</strong> Plants delivered</div>
-            <div class="trust-stat"><strong>15+</strong> Years experience</div>
+            <div class="trust-stat"><strong>18+</strong> Years experience</div>
             <div class="trust-stat"><strong>6</strong> Sectors served</div>
             <div class="trust-stat"><strong>20-45%</strong> Typical process gains</div>
         </div>
@@ -99,7 +99,7 @@ include __DIR__ . '/includes/header.php';
                 <p style="margin-bottom: 8px;">Indicative outcomes from recent operational excellence engagements. Exact results depend on starting point and scope.</p>
                 <div class="stats-container">
                     <div class="stat">
-                        <h3>15+</h3>
+                        <h3>18+</h3>
                         <p>Years in operations &amp; Lean practice</p>
                     </div>
                     <div class="stat">

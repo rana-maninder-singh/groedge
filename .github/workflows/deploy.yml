@@ -30,21 +30,8 @@ jobs:
           fi
           echo "All PHP files pass syntax check"
 
-      # Restore personal-site root redirect only (do NOT sync/wipe httpdocs —
-      # the Learnings site lives there under /website/ from D:\projects\Learnings)
-      - name: Restore ranamanindersingh.com root redirect
-        env:
-          FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
-          FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
-          FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
-        run: |
-          curl -s --connect-timeout 15 --max-time 30 \
-            -u "$FTP_USER:$FTP_PASS" \
-            -T ranamanindersingh/index.html \
-            "ftp://$FTP_HOST/httpdocs/index.html"
-          echo "Restored httpdocs/index.html → /website/ redirect"
-
-      # GroEdge only: groedge.in → /groedge.in/
+      # GroEdge only. Same server IP as ranamanindersingh.com, different document root.
+      # Never write /httpdocs/ from this workflow — that folder is the personal site.
       - name: Deploy groedge.in
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:

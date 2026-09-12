@@ -924,6 +924,68 @@ form button:hover {
     color: var(--ink);
 }
 
+.founder-profile {
+    margin: 10px 0 48px;
+    padding: 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+}
+
+.founder-profile-head {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.founder-avatar {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.founder-kicker {
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.founder-profile h2 {
+    margin: 0 0 6px;
+}
+
+.founder-meta {
+    color: #4a5568;
+    margin: 0;
+}
+
+.founder-profile h3 {
+    margin: 28px 0 12px;
+    color: var(--ink);
+}
+
+.founder-results {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.founder-results li {
+    margin-bottom: 12px;
+}
+
+.founder-cta {
+    margin: 24px 0 0;
+}
+
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
